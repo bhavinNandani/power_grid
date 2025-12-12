@@ -8,4 +8,8 @@
 /tmp/
 
 # rspec failure tracking
+# rspec failure tracking
 .rspec_status
+
+*.gem
+Gemfile.lock

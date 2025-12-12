@@ -1,16 +1,6 @@
 require "rails_helper"
 
 RSpec.describe PowerGrid::Base, type: :model do
-  # Setup models for this test
-  class Post < ActiveRecord::Base
-    belongs_to :user
-  end
-
-  # Open the User class from dummy app and add association
-  User.class_eval do
-    has_many :posts, class_name: "Post"
-  end
-
   class UsersWithPostsTable < PowerGrid::Base
     scope { User.joins(:posts) }
     
@@ -19,25 +9,9 @@ RSpec.describe PowerGrid::Base, type: :model do
     column :"posts.title", sortable: true, searchable: true, sql_expression: "posts.title"
   end
 
-  before(:all) do
-    # Create temp table for posts
-    ActiveRecord::Schema.define do
-      create_table :posts, force: true do |t|
-        t.string :title
-        t.references :user
-      end
-    end
-  end
-
-  after(:all) do
-    ActiveRecord::Schema.define do
-      drop_table :posts
-    end
-  end
-
   before do
-    User.delete_all
     Post.delete_all
+    User.delete_all
     
     alice = User.create!(name: "Alice", email: "alice@example.com", status: "active")
     bob = User.create!(name: "Bob", email: "bob@example.com", status: "inactive")

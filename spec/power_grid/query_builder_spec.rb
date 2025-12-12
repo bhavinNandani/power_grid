@@ -9,9 +9,11 @@ RSpec.describe PowerGrid::Base, type: :model do
   end
 
   before do
-    User.create!(name: "Alice", email: "alice@example.com", status: "active")
-    User.create!(name: "Bob", email: "bob@example.com", status: "inactive")
-    User.create!(name: "Charlie", email: "charlie@example.com", status: "active")
+    Post.delete_all
+    User.delete_all
+    @alice = User.create(name: "Alice", email: "alice@example.com", status: "active")
+    @bob = User.create(name: "Bob", email: "bob@example.com", status: "inactive")
+    @charlie = User.create(name: "Charlie", email: "charlie@example.com", status: "active")
   end
 
   describe "#records" do

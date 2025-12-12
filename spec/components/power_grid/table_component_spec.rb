@@ -8,6 +8,8 @@ RSpec.describe PowerGrid::TableComponent, type: :component do
   end
 
   before do
+    Post.delete_all
+    User.delete_all
     User.create!(name: "Alice", email: "alice@example.com")
     User.create!(name: "Bob", email: "bob@example.com")
   end
@@ -17,8 +19,8 @@ RSpec.describe PowerGrid::TableComponent, type: :component do
       render_inline(described_class.new(UsersTable, params: {}))
     end
 
-    expect(page).to have_content("User 1")
-    expect(page).to have_content("User 2")
+    expect(page).to have_content("Alice")
+    expect(page).to have_content("Bob")
     expect(page).to have_content("Name")
     expect(page).to have_css("table.min-w-full") # Tailwind class
     expect(page).to have_select("per_page")

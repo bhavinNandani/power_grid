@@ -1,5 +1,8 @@
 # PowerGrid
 
+[![Gem Version](https://badge.fury.io/rb/power_grid.svg)](https://badge.fury.io/rb/power_grid)
+[![CI](https://github.com/bhavinNandani/power_grid/actions/workflows/ci.yml/badge.svg)](https://github.com/bhavinNandani/power_grid/actions/workflows/ci.yml)
+
 **PowerGrid** is a production-ready, server-side processed table component for Rails applications. It combines the raw performance of Active Record with the responsiveness of modern UI frameworks like Hotwire and Stimulus.
 
 Built with **ViewComponent**, **Turbo Frames**, **Stimulus**, and **TailwindCSS**, PowerGrid offers a premium, SPA-like experience without the complexity of a Javascript frontend framework.
