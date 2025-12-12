@@ -1,0 +1,127 @@
+<div class="power-grid-container w-full bg-white dark:bg-slate-900 rounded-lg shadow ring-1 ring-slate-900/5" data-controller="power-grid-table">
+  
+  <!-- Top Controls: Per Page & Search -->
+  <div class="flex flex-col sm:flex-row justify-between items-center p-4 border-b border-slate-200 dark:border-slate-700 space-y-3 sm:space-y-0">
+    <!-- Per Page -->
+    <div class="flex items-center text-sm text-slate-700 dark:text-slate-300">
+      <span class="mr-2">Show</span>
+      <%= form_with url: request.path, method: :get, data: { turbo_frame: "power_grid_table", turbo_action: "advance", power_grid_table_target: "form" }, class: "inline-block", id: "power_grid_form_#{request.path.parameterize}" do |f| %>
+        <% params.except(:per_page, :page).each do |key, value| %>
+          <%= hidden_field_tag key, value %>
+        <% end %>
+        <!-- Reset page to 1 on limit change -->
+        <%= hidden_field_tag :page, 1 %>
+        
+        <%= select_tag :per_page, options_for_select([10, 25, 50, 100], @grid.per_page), 
+            class: "mx-1 mt-1 block w-20 rounded-md border-slate-300 py-1.5 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm dark:bg-slate-800 dark:border-slate-600 dark:text-white", 
+            data: { action: "change->power-grid-table#search" } 
+        %>
+      <% end %>
+      <span class="ml-2">entries</span>
+    </div>
+
+    <!-- Search -->
+    <div class="w-full sm:w-auto">
+      <div class="relative rounded-md shadow-sm">
+        <label for="search" class="sr-only">Search</label>
+        <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+          <svg class="h-5 w-5 text-slate-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clip-rule="evenodd" />
+          </svg>
+        </div>
+        <%= text_field_tag :q, params[:q], placeholder: "Search...", 
+            class: "block w-full rounded-md border-0 py-1.5 pl-10 text-slate-900 ring-1 ring-inset ring-slate-300 placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-slate-800 dark:text-white dark:ring-slate-600 dark:placeholder-slate-500", 
+            data: { action: "input->power-grid-table#search" },
+            form: "power_grid_form_#{request.path.parameterize}" 
+        %>
+      </div>
+    </div>
+  </div>
+
+  <%= turbo_frame_tag "power_grid_table" do %>
+    <div class="overflow-x-auto">
+      <table class="min-w-full divide-y divide-slate-200 dark:divide-slate-700">
+        <thead class="bg-slate-50 dark:bg-slate-800/80">
+          <tr>
+            <% columns.each do |key, options| %>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider dark:text-slate-400">
+                <% if options[:sortable] %>
+                  <%= link_to request.params.merge(order: key, dir: (params[:order] == key.to_s && params[:dir] == "asc" ? "desc" : "asc")), class: "group inline-flex items-center", data: { turbo_action: "advance" } do %>
+                    <%= key.to_s.humanize %>
+                    <span class="ml-2 flex-none rounded text-slate-400 group-hover:text-slate-600 dark:group-hover:text-slate-300">
+                      <% if params[:order] == key.to_s %>
+                        <%= params[:dir] == "asc" ? "▲" : "▼" %>
+                      <% else %>
+                        <svg class="h-4 w-4 opacity-0 group-hover:opacity-100" viewBox="0 0 20 20" fill="currentColor">
+                          <path fill-rule="evenodd" d="M10 3a.75.75 0 01.55.24l3.25 3.5a.75.75 0 11-1.1 1.02L10 4.852 7.3 7.76a.75.75 0 01-1.1-1.02l3.25-3.5A.75.75 0 0110 3zm-3.76 9.2a.75.75 0 011.06.04l2.7 2.908 2.7-2.908a.75.75 0 111.1 1.02l-3.25 3.5a.75.75 0 01-1.1 0l-3.25-3.5a.75.75 0 01.04-1.06z" clip-rule="evenodd" />
+                        </svg>
+                      <% end %>
+                    </span>
+                  <% end %>
+                <% else %>
+                  <%= key.to_s.humanize %>
+                <% end %>
+              </th>
+            <% end %>
+          </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-slate-200 dark:bg-slate-900 dark:divide-slate-700">
+          <% records.each_with_index do |record, index| %>
+            <tr class="<%= index.even? ? 'bg-white dark:bg-slate-900' : 'bg-slate-50 dark:bg-slate-800/50' %> hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+              <% columns.each do |key, options| %>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-900 dark:text-slate-100">
+                  <% if options[:block] %>
+                    <%= options[:block].call(record) %>
+                  <% else %>
+                    <%= record.send(key) %>
+                  <% end %>
+                </td>
+              <% end %>
+            </tr>
+          <% end %>
+          <% if records.empty? %>
+            <tr>
+               <td colspan="<%= columns.size %>" class="px-6 py-10 text-center text-sm text-slate-500 dark:text-slate-400">
+                 No matching records found
+               </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Pagination Footer -->
+    <div class="flex items-center justify-between border-t border-slate-200 bg-white px-4 py-3 sm:px-6 dark:bg-slate-900 dark:border-slate-700">
+       <!-- Entries Info -->
+       <div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
+          <div>
+            <p class="text-sm text-slate-700 dark:text-slate-300">
+              Showing <span class="font-medium"><%= @grid.page_range_start %></span> to <span class="font-medium"><%= @grid.page_range_end %></span> of <span class="font-medium"><%= @grid.total_count %></span> entries
+            </p>
+          </div>
+          <div>
+            <!-- Numbered Pagination Controls -->
+             <nav class="isolate inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
+               <% if @grid.current_page > 1 %>
+                 <%= link_to "Previous", request.params.merge(page: @grid.current_page - 1), class: "relative inline-flex items-center rounded-l-md px-2 py-2 text-slate-400 ring-1 ring-inset ring-slate-300 hover:bg-slate-50 focus:z-20 focus:outline-offset-0 dark:ring-slate-600 dark:hover:bg-slate-800", data: { turbo_action: "advance" } %>
+               <% end %>
+               
+               <% @grid.pagination_window.each do |page| %>
+                 <% if page == :gap %>
+                   <span class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-slate-700 ring-1 ring-inset ring-slate-300 focus:outline-offset-0 dark:text-slate-200 dark:ring-slate-600">...</span>
+                 <% elsif page == @grid.current_page %>
+                   <span class="relative z-10 inline-flex items-center bg-indigo-600 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"><%= page %></span>
+                 <% else %>
+                   <%= link_to page, request.params.merge(page: page), class: "relative inline-flex items-center px-4 py-2 text-sm font-semibold text-slate-900 ring-1 ring-inset ring-slate-300 hover:bg-slate-50 focus:z-20 focus:outline-offset-0 dark:text-slate-200 dark:ring-slate-600 dark:hover:bg-slate-800", data: { turbo_action: "advance" } %>
+                 <% end %>
+               <% end %>
+
+               <% if @grid.current_page < @grid.total_pages %>
+                 <%= link_to "Next", request.params.merge(page: @grid.current_page + 1), class: "relative inline-flex items-center rounded-r-md px-2 py-2 text-slate-400 ring-1 ring-inset ring-slate-300 hover:bg-slate-50 focus:z-20 focus:outline-offset-0 dark:ring-slate-600 dark:hover:bg-slate-800", data: { turbo_action: "advance" } %>
+               <% end %>
+            </nav>
+          </div>
+       </div>
+    </div>
+  <% end %>
+</div>
