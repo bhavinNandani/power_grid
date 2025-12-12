@@ -30,8 +30,8 @@ module PowerGrid
 
     attr_reader :params, :initial_scope
 
-    def initialize(params = {}, initial_scope: nil)
-      @params = params
+    def initialize(params = {}, initial_scope: nil, **options)
+      @params = params.merge(options)
       @initial_scope = initial_scope
     end
 
