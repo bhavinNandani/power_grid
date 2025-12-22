@@ -115,34 +115,38 @@
     </div>
 
     <!-- Pagination Footer -->
-    <div class="flex items-center justify-between border-t border-slate-200 bg-white px-4 py-3 sm:px-6 dark:bg-slate-900 dark:border-slate-700 rounded-b-lg">
+    <div class="flex items-center justify-between pt-4 px-1">
        <!-- Entries Info -->
        <div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
           <div>
-            <p class="text-sm text-slate-700 dark:text-slate-300">
-              Showing <span class="font-medium"><%= @grid.page_range_start %></span> to <span class="font-medium"><%= @grid.page_range_end %></span> of <span class="font-medium"><%= @grid.total_count %></span> entries
+            <p class="text-sm text-slate-500 dark:text-slate-400">
+              Showing <span class="font-medium text-slate-900 dark:text-slate-200"><%= @grid.page_range_start %></span> to <span class="font-medium text-slate-900 dark:text-slate-200"><%= @grid.page_range_end %></span> of <span class="font-medium text-slate-900 dark:text-slate-200"><%= @grid.total_count %></span> results
             </p>
           </div>
           <div>
-            <!-- Numbered Pagination Controls -->
+            <!-- Pagination Controls -->
             <% if @grid.total_pages > 1 %>
-             <nav class="isolate inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
+             <nav class="isolate inline-flex -space-x-px rounded-md" aria-label="Pagination">
                <% if @grid.current_page > 1 %>
-                 <%= link_to "Previous", request.params.merge(page: @grid.current_page - 1), class: "relative inline-flex items-center rounded-l-md px-2 py-2 text-slate-400 ring-1 ring-inset ring-slate-300 hover:bg-slate-50 focus:z-20 focus:outline-offset-0 dark:ring-slate-600 dark:hover:bg-slate-800", data: { turbo_action: "advance" } %>
+                 <%= link_to "Previous", request.params.merge(page: @grid.current_page - 1), class: "relative inline-flex items-center rounded-l-md px-3 py-2 text-sm font-medium text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 focus:z-20 focus:outline-offset-0", data: { turbo_action: "advance" } %>
+               <% else %>
+                 <span class="relative inline-flex items-center rounded-l-md px-3 py-2 text-sm font-medium text-slate-300 dark:text-slate-600 cursor-not-allowed">Previous</span>
                <% end %>
                
                <% @grid.pagination_window.each do |page| %>
                  <% if page == :gap %>
-                   <span class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-slate-700 ring-1 ring-inset ring-slate-300 focus:outline-offset-0 dark:text-slate-200 dark:ring-slate-600">...</span>
+                   <span class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-slate-400 dark:text-slate-500">...</span>
                  <% elsif page == @grid.current_page %>
-                   <span class="relative z-10 inline-flex items-center bg-indigo-600 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"><%= page %></span>
+                   <span class="relative z-10 inline-flex items-center px-4 py-2 text-sm font-semibold text-indigo-600 dark:text-indigo-400 focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"><%= page %></span>
                  <% else %>
-                   <%= link_to page, request.params.merge(page: page), class: "relative inline-flex items-center px-4 py-2 text-sm font-semibold text-slate-900 ring-1 ring-inset ring-slate-300 hover:bg-slate-50 focus:z-20 focus:outline-offset-0 dark:text-slate-200 dark:ring-slate-600 dark:hover:bg-slate-800", data: { turbo_action: "advance" } %>
+                   <%= link_to page, request.params.merge(page: page), class: "relative inline-flex items-center px-4 py-2 text-sm font-semibold text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 focus:z-20 focus:outline-offset-0", data: { turbo_action: "advance" } %>
                  <% end %>
                <% end %>
 
                <% if @grid.current_page < @grid.total_pages %>
-                 <%= link_to "Next", request.params.merge(page: @grid.current_page + 1), class: "relative inline-flex items-center rounded-r-md px-2 py-2 text-slate-400 ring-1 ring-inset ring-slate-300 hover:bg-slate-50 focus:z-20 focus:outline-offset-0 dark:ring-slate-600 dark:hover:bg-slate-800", data: { turbo_action: "advance" } %>
+                 <%= link_to "Next", request.params.merge(page: @grid.current_page + 1), class: "relative inline-flex items-center rounded-r-md px-3 py-2 text-sm font-medium text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 focus:z-20 focus:outline-offset-0", data: { turbo_action: "advance" } %>
+               <% else %>
+                 <span class="relative inline-flex items-center rounded-r-md px-3 py-2 text-sm font-medium text-slate-300 dark:text-slate-600 cursor-not-allowed">Next</span>
                <% end %>
             </nav>
             <% end %>
