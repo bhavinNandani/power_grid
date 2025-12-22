@@ -96,7 +96,7 @@
           <% records.each_with_index do |record, index| %>
             <tr class="<%= index.even? ? 'bg-white dark:bg-slate-900' : 'bg-slate-50 dark:bg-slate-800/50' %> hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
               <% columns.each do |key, options| %>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-900 dark:text-slate-100">
+                <td class="px-6 py-3 whitespace-nowrap align-middle text-sm text-slate-700 dark:text-slate-200">
                   <% if options[:block] %>
                     <%= options[:block].call(record) %>
                   <% else %>
