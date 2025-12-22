@@ -71,9 +71,10 @@
           <tr>
             <% columns.each do |key, options| %>
               <th scope="col" class="px-6 py-3.5 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider dark:text-slate-400">
+                <% label = options[:header] || key.to_s.humanize %>
                 <% if options[:sortable] %>
                   <%= link_to request.params.merge(order: key, dir: (params[:order] == key.to_s && params[:dir] == "asc" ? "desc" : "asc")), class: "group inline-flex items-center hover:text-slate-700 dark:hover:text-slate-200 transition-colors", data: { turbo_action: "advance" } do %>
-                    <%= key.to_s.humanize %>
+                    <%= label %>
                     <span class="ml-2 flex-none rounded text-slate-400 group-hover:text-indigo-500 dark:group-hover:text-indigo-400 transition-colors">
                       <% if params[:order] == key.to_s %>
                         <%= params[:dir] == "asc" ? "▲" : "▼" %>
@@ -85,7 +86,7 @@
                     </span>
                   <% end %>
                 <% else %>
-                  <%= key.to_s.humanize %>
+                  <%= label %>
                 <% end %>
               </th>
             <% end %>
