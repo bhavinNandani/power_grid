@@ -1,10 +1,10 @@
 <div class="power-grid-container w-full bg-white dark:bg-slate-900 rounded-lg shadow ring-1 ring-slate-900/5" data-controller="power-grid-table">
   
   <!-- Top Controls: Per Page & Search & Filters -->
-  <div class="flex flex-col space-y-4 p-4 border-b border-slate-200 dark:border-slate-700">
-    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-3 sm:space-y-0 text-sm">
+  <div class="bg-white dark:bg-slate-900 p-4 border-b border-slate-200 dark:border-slate-700 sm:px-6 rounded-t-lg">
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-3 sm:space-y-0 text-sm">
       
-      <!-- Left: Per Page & Filters -->
+      <!-- Left: Filters & Per Page -->
       <div class="flex flex-wrap items-center gap-4 w-full sm:w-auto">
         <%= form_with url: request.path, method: :get, data: { turbo_frame: "power_grid_table", turbo_action: "advance", power_grid_table_target: "form" }, class: "flex flex-wrap items-center gap-4 w-full", id: "power_grid_form_#{request.path.parameterize}" do |f| %>
           <% params.except(:per_page, :page, :q, *(@grid.class.defined_filters.keys)).each do |key, value| %>
@@ -13,40 +13,33 @@
           <!-- Reset page to 1 on update -->
           <%= hidden_field_tag :page, 1 %>
 
-          <div class="bg-white dark:bg-slate-900 p-4 border-b border-slate-200 dark:border-slate-700 sm:px-6">
-    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-3 sm:space-y-0">
-      
-      <!-- Left: Filters & Per Page -->
-      <div class="flex items-center space-x-4"> 
-        <!-- Per Page Dropdown -->
-        <div class="relative">
+          <!-- Per Page Dropdown -->
+          <div class="relative">
              <label for="per_page" class="sr-only">Per Page</label>
              <%= select_tag :per_page, options_for_select([10, 25, 50, 100], @grid.per_page), 
                  class: "block w-full rounded-md border-0 py-1.5 pl-3 pr-8 text-slate-900 ring-1 ring-inset ring-slate-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-slate-800 dark:text-white dark:ring-slate-600 cursor-pointer",
-                 onchange: "this.form.requestSubmit()",
-                 form: "power_grid_form_#{request.path.parameterize}" 
+                 onchange: "this.form.requestSubmit()"
              %>
-        </div>
+          </div>
 
-         <!-- Dynamic Filters -->
-         <% @grid.class.defined_filters.each do |name, options| %>
-            <div class="relative">
-               <% if options[:collection] %>
-                 <%= select_tag name, options_for_select(options[:collection], params[name]), 
-                     include_blank: "All #{name.to_s.humanize.pluralize}",
-                     class: "block w-full rounded-md border-0 py-1.5 pl-3 pr-8 text-slate-900 ring-1 ring-inset ring-slate-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-slate-800 dark:text-white dark:ring-slate-600 cursor-pointer",
-                     onchange: "this.form.requestSubmit()",
-                     form: "power_grid_form_#{request.path.parameterize}"
-                 %>
-               <% else %>
-                 <%= text_field_tag name, params[name], placeholder: "Filter #{name.to_s.humanize}",
-                     class: "block w-full rounded-md border-0 py-1.5 pl-3 text-slate-900 ring-1 ring-inset ring-slate-300 placeholder:text-slate-400 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-slate-800 dark:text-white dark:ring-slate-600 dark:placeholder-slate-500",
-                     data: { action: "input->power-grid-table#search" },
-                     form: "power_grid_form_#{request.path.parameterize}"
-                 %>
-               <% end %>
-            </div>
-         <% end %>
+           <!-- Dynamic Filters -->
+           <% @grid.class.defined_filters.each do |name, options| %>
+              <div class="relative">
+                 <% if options[:collection] %>
+                   <%= select_tag name, options_for_select(options[:collection], params[name]), 
+                       include_blank: "All #{name.to_s.humanize.pluralize}",
+                       class: "block w-full rounded-md border-0 py-1.5 pl-3 pr-8 text-slate-900 ring-1 ring-inset ring-slate-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-slate-800 dark:text-white dark:ring-slate-600 cursor-pointer",
+                       onchange: "this.form.requestSubmit()"
+                   %>
+                 <% else %>
+                   <%= text_field_tag name, params[name], placeholder: "Filter #{name.to_s.humanize}",
+                       class: "block w-full rounded-md border-0 py-1.5 pl-3 text-slate-900 ring-1 ring-inset ring-slate-300 placeholder:text-slate-400 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-slate-800 dark:text-white dark:ring-slate-600 dark:placeholder-slate-500",
+                       data: { action: "input->power-grid-table#search" }
+                   %>
+                 <% end %>
+              </div>
+           <% end %>
+        <% end %>
       </div>
 
       <!-- Right: Search -->
@@ -124,7 +117,7 @@
     </div>
 
     <!-- Pagination Footer -->
-    <div class="flex items-center justify-between border-t border-slate-200 bg-white px-4 py-3 sm:px-6 dark:bg-slate-900 dark:border-slate-700">
+    <div class="flex items-center justify-between border-t border-slate-200 bg-white px-4 py-3 sm:px-6 dark:bg-slate-900 dark:border-slate-700 rounded-b-lg">
        <!-- Entries Info -->
        <div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
           <div>
