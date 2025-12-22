@@ -1,40 +1,68 @@
 <div class="power-grid-container w-full bg-white dark:bg-slate-900 rounded-lg shadow ring-1 ring-slate-900/5" data-controller="power-grid-table">
   
-  <!-- Top Controls: Per Page & Search -->
-  <div class="flex flex-col sm:flex-row justify-between items-center p-4 border-b border-slate-200 dark:border-slate-700 space-y-3 sm:space-y-0">
-    <!-- Per Page -->
-    <div class="flex items-center text-sm text-slate-700 dark:text-slate-300">
-      <span class="mr-2">Show</span>
-      <%= form_with url: request.path, method: :get, data: { turbo_frame: "power_grid_table", turbo_action: "advance", power_grid_table_target: "form" }, class: "inline-block", id: "power_grid_form_#{request.path.parameterize}" do |f| %>
-        <% params.except(:per_page, :page).each do |key, value| %>
-          <%= hidden_field_tag key, value %>
-        <% end %>
-        <!-- Reset page to 1 on limit change -->
-        <%= hidden_field_tag :page, 1 %>
-        
-        <%= select_tag :per_page, options_for_select([10, 25, 50, 100], @grid.per_page), 
-            class: "mx-1 mt-1 block w-20 rounded-md border-slate-300 py-1.5 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm dark:bg-slate-800 dark:border-slate-600 dark:text-white", 
-            data: { action: "change->power-grid-table#search" } 
-        %>
-      <% end %>
-      <span class="ml-2">entries</span>
-    </div>
+  <!-- Top Controls: Per Page & Search & Filters -->
+  <div class="flex flex-col space-y-4 p-4 border-b border-slate-200 dark:border-slate-700">
+    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-3 sm:space-y-0 text-sm">
+      
+      <!-- Left: Per Page & Filters -->
+      <div class="flex flex-wrap items-center gap-4 w-full sm:w-auto">
+        <%= form_with url: request.path, method: :get, data: { turbo_frame: "power_grid_table", turbo_action: "advance", power_grid_table_target: "form" }, class: "flex flex-wrap items-center gap-4 w-full", id: "power_grid_form_#{request.path.parameterize}" do |f| %>
+          <% params.except(:per_page, :page, :q, *(@grid.class.defined_filters.keys)).each do |key, value| %>
+             <%= hidden_field_tag key, value %>
+          <% end %>
+          <!-- Reset page to 1 on update -->
+          <%= hidden_field_tag :page, 1 %>
 
-    <!-- Search -->
-    <div class="w-full sm:w-auto">
-      <div class="relative rounded-md shadow-sm">
-        <label for="search" class="sr-only">Search</label>
-        <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-          <svg class="h-5 w-5 text-slate-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-            <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clip-rule="evenodd" />
-          </svg>
-        </div>
-        <%= text_field_tag :q, params[:q], placeholder: "Search...", 
-            class: "block w-full rounded-md border-0 py-1.5 pl-10 text-slate-900 ring-1 ring-inset ring-slate-300 placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-slate-800 dark:text-white dark:ring-slate-600 dark:placeholder-slate-500", 
-            data: { action: "input->power-grid-table#search" },
-            form: "power_grid_form_#{request.path.parameterize}" 
-        %>
+          <!-- Per Page -->
+          <div class="flex items-center">
+            <span class="mr-2 text-slate-700 dark:text-slate-300">Show</span>
+            <%= select_tag :per_page, options_for_select([10, 25, 50, 100], @grid.per_page), 
+                class: "block w-20 rounded-md border-slate-300 py-1.5 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm dark:bg-slate-800 dark:border-slate-600 dark:text-white", 
+                data: { action: "change->power-grid-table#search" } 
+            %>
+          </div>
+
+          <!-- Dynamic Filters -->
+          <% @grid.class.defined_filters.each do |name, options| %>
+            <div class="flex items-center">
+              <% if options[:collection] %>
+                 <%= select_tag name, options_for_select(options[:collection], params[name]), 
+                     include_blank: options[:label] || name.to_s.humanize,
+                     class: "block w-40 rounded-md border-slate-300 py-1.5 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm dark:bg-slate-800 dark:border-slate-600 dark:text-white",
+                     data: { action: "change->power-grid-table#search" }
+                 %>
+              <% else %>
+                 <%= text_field_tag name, params[name], 
+                     placeholder: options[:label] || name.to_s.humanize,
+                     class: "block w-40 rounded-md border-slate-300 py-1.5 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm dark:bg-slate-800 dark:border-slate-600 dark:text-white",
+                     data: { action: "change->power-grid-table#search" } # Debounce handled by controller if implemented for change, otherwise change triggers immediately
+                 %>
+              <% end %>
+            </div>
+          <% end %>
+
+        <% end %>
       </div>
+
+      <!-- Right: Search -->
+      <% if @grid.searchable? %>
+        <div class="w-full sm:w-auto">
+          <label for="search" class="sr-only">Search</label>
+          <div class="relative rounded-md shadow-sm">
+            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+              <svg class="h-5 w-5 text-slate-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clip-rule="evenodd" />
+              </svg>
+            </div>
+            <%= text_field_tag :q, params[:q], placeholder: "Search...", 
+                class: "block w-full rounded-md border-0 py-1.5 pl-10 text-slate-900 ring-1 ring-inset ring-slate-300 placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-slate-800 dark:text-white dark:ring-slate-600 dark:placeholder-slate-500", 
+                data: { action: "input->power-grid-table#search" },
+                form: "power_grid_form_#{request.path.parameterize}" 
+            %>
+          </div>
+        </div>
+      <% end %>
+      
     </div>
   </div>
 
@@ -101,6 +129,7 @@
           </div>
           <div>
             <!-- Numbered Pagination Controls -->
+            <% if @grid.total_pages > 1 %>
              <nav class="isolate inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
                <% if @grid.current_page > 1 %>
                  <%= link_to "Previous", request.params.merge(page: @grid.current_page - 1), class: "relative inline-flex items-center rounded-l-md px-2 py-2 text-slate-400 ring-1 ring-inset ring-slate-300 hover:bg-slate-50 focus:z-20 focus:outline-offset-0 dark:ring-slate-600 dark:hover:bg-slate-800", data: { turbo_action: "advance" } %>
@@ -120,6 +149,7 @@
                  <%= link_to "Next", request.params.merge(page: @grid.current_page + 1), class: "relative inline-flex items-center rounded-r-md px-2 py-2 text-slate-400 ring-1 ring-inset ring-slate-300 hover:bg-slate-50 focus:z-20 focus:outline-offset-0 dark:ring-slate-600 dark:hover:bg-slate-800", data: { turbo_action: "advance" } %>
                <% end %>
             </nav>
+            <% end %>
           </div>
        </div>
     </div>

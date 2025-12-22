@@ -39,7 +39,7 @@ module PowerGrid
       @records ||= begin
         scope = @initial_scope || instance_eval(&self.class.defined_scope)
         scope = apply_includes(scope)
-        scope = apply_includes(scope)
+        scope = apply_filters(scope)
         scope = apply_search(scope)
         scope = apply_sort(scope)
         
@@ -55,6 +55,10 @@ module PowerGrid
       # Ensure records are loaded to populate @total_count
       records unless defined?(@total_count)
       @total_count
+    end
+
+    def searchable?
+      self.class.defined_columns.any? { |_, opts| opts[:searchable] }
     end
 
     def current_page
@@ -148,6 +152,22 @@ module PowerGrid
       sort_expr = column_def[:sql_expression] || order_column
       
       scope.order(sort_expr => direction)
+    end
+
+    def apply_filters(scope)
+      self.class.defined_filters.each do |name, options|
+        value = params[name]
+        next if value.blank?
+
+        # Basic equality filter for now. 
+        # TODO: Support blocks/procs for custom filtering
+        
+        # If sql_expression option exists, use that
+        col_name = options[:sql_expression] || name
+        
+        scope = scope.where(col_name => value)
+      end
+      scope
     end
 
   end
