@@ -17,7 +17,7 @@
           <div class="relative">
              <label for="per_page" style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0;">Per Page</label>
              <%= select_tag :per_page, options_for_select([10, 25, 50, 100], @grid.per_page), 
-                 class: "block w-full rounded-md border-0 py-1.5 pl-3 pr-8 text-slate-900 ring-1 ring-inset ring-slate-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-slate-800 dark:text-white dark:ring-slate-600 cursor-pointer",
+                 class: "block w-full h-9 rounded-md border-0 py-1.5 pl-3 pr-8 text-slate-900 ring-1 ring-inset ring-slate-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-slate-800 dark:text-white dark:ring-slate-600 cursor-pointer",
                  onchange: "this.form.requestSubmit()"
              %>
           </div>
@@ -28,12 +28,12 @@
                  <% if options[:collection] %>
                    <%= select_tag name, options_for_select(options[:collection], params[name]), 
                        include_blank: "All #{name.to_s.humanize.pluralize}",
-                       class: "block w-full rounded-md border-0 py-1.5 pl-3 pr-8 text-slate-900 ring-1 ring-inset ring-slate-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-slate-800 dark:text-white dark:ring-slate-600 cursor-pointer",
+                       class: "block w-full h-9 rounded-md border-0 py-1.5 pl-3 pr-8 text-slate-900 ring-1 ring-inset ring-slate-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-slate-800 dark:text-white dark:ring-slate-600 cursor-pointer",
                        onchange: "this.form.requestSubmit()"
                    %>
                  <% else %>
                    <%= text_field_tag name, params[name], placeholder: "Filter #{name.to_s.humanize}",
-                       class: "block w-full rounded-md border-0 py-1.5 pl-3 text-slate-900 ring-1 ring-inset ring-slate-300 placeholder:text-slate-400 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-slate-800 dark:text-white dark:ring-slate-600 dark:placeholder-slate-500",
+                       class: "block w-full h-9 rounded-md border-0 py-1.5 pl-3 text-slate-900 ring-1 ring-inset ring-slate-300 placeholder:text-slate-400 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-slate-800 dark:text-white dark:ring-slate-600 dark:placeholder-slate-500",
                        data: { action: "input->power-grid-table#search" }
                    %>
                  <% end %>
@@ -53,7 +53,7 @@
               </svg>
             </div>
             <%= text_field_tag :q, params[:q], placeholder: "Search records...", 
-                class: "block w-full rounded-full border-0 py-1.5 pl-10 pr-4 text-slate-900 ring-1 ring-inset ring-slate-300 placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-slate-800 dark:text-white dark:ring-slate-600 dark:placeholder-slate-500 bg-slate-50 hover:bg-white transition-colors", 
+                class: "block w-full h-9 rounded-full border-0 py-1.5 pl-10 pr-4 text-slate-900 ring-1 ring-inset ring-slate-300 placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-slate-800 dark:text-white dark:ring-slate-600 dark:placeholder-slate-500 bg-slate-50 hover:bg-white transition-colors", 
                 data: { action: "input->power-grid-table#search" },
                 form: "power_grid_form_#{request.path.parameterize}" 
             %>
