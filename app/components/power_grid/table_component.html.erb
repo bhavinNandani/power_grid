@@ -1,86 +1,85 @@
-<div class="power-grid-container w-full" data-controller="power-grid-table">
+<div class="power-grid-container w-full bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800" data-controller="power-grid-table">
   
-  <div class="w-full space-y-4 font-inter text-slate-800 dark:text-slate-200">
-  
-  <!-- Control Bar: Search (Left) & Filters (Right) -->
+  <!-- Clean Toolbar -->
   <% unless @grid.try(:hide_controls) %>
-  <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 pb-4">
+  <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 p-4 border-b border-slate-200 dark:border-slate-800">
     
-    <!-- Left: Search -->
-    <% if @grid.searchable? %>
-      <div class="w-full md:w-96 relative group">
-        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-          <svg class="h-4 w-4 text-slate-400 group-focus-within:text-indigo-500 transition-colors" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
-          </svg>
+    <!-- Search -->
+    <div class="w-full md:w-72">
+      <% if @grid.searchable? %>
+        <div class="relative">
+          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <svg class="h-5 w-5 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </div>
+          <%= text_field_tag :q, params[:q], placeholder: "Search...", 
+              class: "block w-full pl-12 pr-3 py-2 border border-slate-300 dark:border-slate-700 rounded-lg leading-5 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm", 
+              data: { action: "input->power-grid-table#search" },
+              form: "power_grid_form_#{request.path.parameterize}" 
+          %>
         </div>
-        <%= text_field_tag :q, params[:q], placeholder: "Search records...", 
-            class: "block w-full pl-9 pr-3 py-2 border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 rounded-lg text-sm text-slate-700 dark:text-slate-200 placeholder-slate-400 transition-all shadow-sm focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 hover:border-slate-300 dark:hover:border-slate-600", 
-            data: { action: "input->power-grid-table#search" },
-            form: "power_grid_form_#{request.path.parameterize}" 
-        %>
-      </div>
-    <% else %>
-      <div></div> <!-- Spacer -->
-    <% end %>
+      <% end %>
+    </div>
 
-    <!-- Right: Filters & Per Page -->
-    <div class="flex flex-wrap items-center justify-end gap-3 w-full md:w-auto">
-      <%= form_with url: request.path, method: :get, data: { turbo_frame: "power_grid_table", turbo_action: "advance", power_grid_table_target: "form" }, class: "flex flex-wrap items-center gap-3", id: "power_grid_form_#{request.path.parameterize}" do |f| %>
+    <!-- Filters & Actions -->
+    <div class="flex items-center gap-3">
+      <%= form_with url: request.path, method: :get, data: { turbo_frame: "power_grid_table", turbo_action: "advance", power_grid_table_target: "form" }, class: "flex items-center gap-3", id: "power_grid_form_#{request.path.parameterize}" do |f| %>
         <% params.except(:per_page, :page, :q, *(@grid.class.defined_filters.keys)).each do |key, value| %>
            <%= hidden_field_tag key, value %>
         <% end %>
 
-         <!-- Dynamic Filters -->
+         <!-- Filters -->
          <% @grid.class.defined_filters.each do |name, options| %>
             <div class="relative">
                <% if options[:collection] %>
                  <%= select_tag name, options_for_select(options[:collection], params[name]), 
                      include_blank: "All #{name.to_s.humanize.pluralize}",
-                     class: "block w-full h-9 min-w-[140px] pl-3 pr-8 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 py-1.5 text-slate-700 dark:text-slate-200 text-sm shadow-sm focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 cursor-pointer hover:border-slate-300 dark:hover:border-slate-600 transition-all font-medium",
+                     class: "block w-full pl-3 pr-10 py-2 text-base border-slate-300 dark:border-slate-700 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-lg bg-white dark:bg-slate-800",
                      onchange: "this.form.requestSubmit()"
                  %>
                <% else %>
-                 <%= text_field_tag name, params[name], placeholder: "#{name.to_s.humanize}",
-                     class: "block w-full h-9 min-w-[140px] rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 py-1.5 pl-3 text-slate-700 dark:text-slate-200 text-sm shadow-sm focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 placeholder-slate-400 hover:border-slate-300 dark:hover:border-slate-600 transition-all",
+                 <%= text_field_tag name, params[name], placeholder: name.to_s.humanize,
+                     class: "block w-full pl-3 pr-3 py-2 border border-slate-300 dark:border-slate-700 rounded-lg leading-5 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm",
                      data: { action: "input->power-grid-table#search" }
                  %>
                <% end %>
             </div>
          <% end %>
          
-        <!-- Per Page Dropdown -->
-        <div class="relative">
+        <!-- Per Page -->
+        <div>
            <%= select_tag :per_page, options_for_select([10, 25, 50, 100], @grid.per_page), 
-               class: "block h-9 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 py-1.5 pl-3 pr-8 text-slate-700 dark:text-slate-200 text-sm shadow-sm focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 cursor-pointer hover:border-slate-300 dark:hover:border-slate-600 transition-all font-medium",
+               class: "block w-full pl-3 pr-10 py-2 text-base border-slate-300 dark:border-slate-700 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-lg bg-white dark:bg-slate-800",
                onchange: "this.form.requestSubmit()"
            %>
         </div>
 
       <% end %>
     </div>
-    
   </div>
   <% end %>
 
   <%= turbo_frame_tag "power_grid_table", class: "w-full block" do %>
-    <div class="overflow-x-auto w-full">
-      <table class="min-w-full whitespace-nowrap text-left border-separate border-spacing-y-0">
-        <thead>
-          <tr class="border-b border-slate-200 dark:border-slate-700">
-            <% columns.each do |key, options| %>
-              <th scope="col" class="px-4 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wide dark:text-slate-400 <%= options[:class] %>">
+    <div class="overflow-x-auto">
+      <table class="min-w-full divide-y divide-slate-200 dark:divide-slate-700">
+        <thead class="bg-slate-50 dark:bg-slate-800">
+          <tr>
+            <% columns.each_with_index do |(key, options), idx| %>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                 <% label = options[:header] || key.to_s.humanize %>
                 <% if options[:sortable] %>
-                  <%= link_to request.params.merge(order: key, dir: (params[:order] == key.to_s && params[:dir] == "asc" ? "desc" : "asc")), class: "group inline-flex items-center hover:text-slate-700 dark:hover:text-slate-200 transition-colors", data: { turbo_action: "advance" } do %>
-                    <%= label %>
-                    <span class="ml-1 flex-none rounded text-slate-400 group-hover:text-indigo-500 transition-colors">
+                  <%= link_to request.params.merge(order: key, dir: (params[:order] == key.to_s && params[:dir] == "asc" ? "desc" : "asc")), class: "group inline-flex items-center space-x-1 hover:text-slate-700 dark:hover:text-slate-200", data: { turbo_action: "advance" } do %>
+                    <span><%= label %></span>
+                    <span class="flex-none rounded text-slate-400 group-hover:text-slate-600 dark:group-hover:text-slate-300">
                       <% if params[:order] == key.to_s %>
-                        <%= params[:dir] == "asc" ? "▲" : "▼" %>
+                         <% if params[:dir] == "asc" %>
+                           <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M14.77 12.79a.75.75 0 01-1.06-.02L10 8.832 6.29 12.77a.75.75 0 11-1.08-1.04l4.25-4.5a.75.75 0 011.08 0l4.25 4.5a.75.75 0 01-.02 1.06z" clip-rule="evenodd" /></svg>
+                         <% else %>
+                           <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" /></svg>
+                         <% end %>
                       <% else %>
-                        <svg class="h-3 w-3 opacity-0 group-hover:opacity-100 transition-opacity" viewBox="0 0 20 20" fill="currentColor">
-                          <path fill-rule="evenodd" d="M10 3a.75.75 0 01.55.24l3.25 3.5a.75.75 0 11-1.1 1.02L10 4.852 7.3 7.76a.75.75 0 01-1.1-1.02l3.25-3.5A.75.75 0 0110 3zm-3.76 9.2a.75.75 0 011.06.04l2.7 2.908 2.7-2.908a.75.75 0 111.1 1.02l-3.25 3.5a.75.75 0 01-1.1 0l-3.25-3.5a.75.75 0 01.04-1.06z" clip-rule="evenodd" />
-                        </svg>
+                        <svg class="h-4 w-4 opacity-50 group-hover:opacity-100" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414 7.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3zm-3.707 9.293a1 1 0 011.414 0L10 14.586l2.293-2.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
                       <% end %>
                     </span>
                   <% end %>
@@ -91,11 +90,11 @@
             <% end %>
           </tr>
         </thead>
-        <tbody class="divide-y divide-slate-100 dark:divide-slate-800/50">
+        <tbody class="divide-y divide-slate-200 dark:divide-slate-700 bg-white dark:bg-slate-900">
           <% records.each_with_index do |record, index| %>
-            <tr class="hover:bg-slate-50/80 dark:hover:bg-slate-800/50 transition-colors group">
+            <tr class="hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
               <% columns.each do |key, options| %>
-                <td class="px-4 py-3 align-middle text-sm text-slate-600 dark:text-slate-300 font-medium <%= options[:class] %>">
+                <td class="px-6 py-5 whitespace-nowrap text-sm text-slate-700 dark:text-slate-300 font-medium <%= options[:class] %>">
                   <% if options[:block] %>
                     <%= options[:block].call(record) %>
                   <% else %>
@@ -108,11 +107,14 @@
           <% if records.empty? %>
             <tr>
                <td colspan="<%= columns.size %>" class="px-6 py-12 text-center text-sm text-slate-500 dark:text-slate-400">
-                 <div class="flex flex-col items-center justify-center space-y-2">
-                   <svg class="h-8 w-8 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                   </svg>
-                   <p>No matching records found</p>
+                 <div class="flex flex-col items-center justify-center space-y-3">
+                   <div style="height: 48px; width: 48px;" class="mx-auto text-slate-300">
+                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="48" height="48" style="min-width: 48px; min-height: 48px;">
+                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                     </svg>
+                   </div>
+                   <p class="text-base font-medium text-slate-900 dark:text-white">No records found</p>
+                   <p class="text-slate-400">Try adjusting your search or filters</p>
                  </div>
                </td>
             </tr>
@@ -121,41 +123,52 @@
       </table>
     </div>
 
-    <!-- Pagination Footer -->
-    <div class="flex items-center justify-center pt-6 pb-2">
-       <% if @grid.total_pages > 1 %>
-         <nav class="isolate inline-flex items-center space-x-1" aria-label="Pagination">
-           <!-- Prev -->
-           <% if @grid.current_page > 1 %>
-             <%= link_to request.params.merge(page: @grid.current_page - 1), class: "inline-flex items-center justify-center w-8 h-8 rounded-lg text-slate-500 hover:text-indigo-600 hover:bg-slate-50 transition-all", data: { turbo_action: "advance" } do %>
-               <span class="sr-only">Previous</span>
-               <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                 <path fill-rule="evenodd" d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z" clip-rule="evenodd" />
-               </svg>
-             <% end %>
-           <% end %>
-           
-           <% @grid.pagination_window.each do |page| %>
-             <% if page == :gap %>
-               <span class="inline-flex items-center justify-center w-8 h-8 text-sm text-slate-400">...</span>
-             <% elsif page == @grid.current_page %>
-               <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg text-sm font-semibold bg-indigo-50 text-indigo-600 ring-1 ring-inset ring-indigo-500/10"><%= page %></span>
-             <% else %>
-               <%= link_to page, request.params.merge(page: page), class: "inline-flex items-center justify-center w-8 h-8 rounded-lg text-sm font-medium text-slate-500 hover:text-indigo-600 hover:bg-slate-50 transition-all", data: { turbo_action: "advance" } %>
-             <% end %>
-           <% end %>
+    <!-- Clean Pagination Footer -->
+    <% if @grid.total_pages > 1 %>
+      <div class="flex items-center justify-between px-6 py-4 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 rounded-b-xl">
+         <!-- Mobile Pagination help text -->
+         <div class="text-sm text-slate-700 dark:text-slate-400 hidden sm:block">
+            Showing <span class="font-medium"><%= @grid.current_page %></span> of <span class="font-medium"><%= @grid.total_pages %></span> pages
+         </div>
+         
+         <!-- Centered Pagination Controls -->
+         <div class="flex-1 flex justify-end sm:justify-end">
+            <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+              <!-- Prev -->
+              <%= link_to (@grid.current_page > 1 ? request.params.merge(page: @grid.current_page - 1) : "#"), 
+                  class: "relative inline-flex items-center px-2 py-2 rounded-l-md border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm font-medium #{@grid.current_page > 1 ? 'text-slate-500 hover:bg-slate-50 dark:text-slate-400 dark:hover:bg-slate-700' : 'text-slate-300 cursor-not-allowed'}",
+                  disabled: @grid.current_page <= 1,
+                  data: { turbo_action: "advance" } do %>
+                <span class="sr-only">Previous</span>
+                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z" clip-rule="evenodd" />
+                </svg>
+              <% end %>
+              
+              <% @grid.pagination_window.each do |page| %>
+                <% if page == :gap %>
+                  <span class="relative inline-flex items-center px-4 py-2 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm font-medium text-slate-700 dark:text-slate-300">...</span>
+                <% elsif page == @grid.current_page %>
+                  <span class="z-10 bg-indigo-50 dark:bg-indigo-900 border-indigo-500 text-indigo-600 dark:text-indigo-200 relative inline-flex items-center px-4 py-2 border text-sm font-medium"><%= page %></span>
+                <% else %>
+                  <%= link_to page, request.params.merge(page: page), class: "bg-white dark:bg-slate-800 border-slate-300 dark:border-slate-700 text-slate-500 hover:bg-slate-50 dark:text-slate-400 dark:hover:bg-slate-700 relative inline-flex items-center px-4 py-2 border text-sm font-medium", data: { turbo_action: "advance" } %>
+                <% end %>
+              <% end %>
 
-           <!-- Next -->
-           <% if @grid.current_page < @grid.total_pages %>
-             <%= link_to request.params.merge(page: @grid.current_page + 1), class: "inline-flex items-center justify-center w-8 h-8 rounded-lg text-slate-500 hover:text-indigo-600 hover:bg-slate-50 transition-all", data: { turbo_action: "advance" } do %>
-               <span class="sr-only">Next</span>
-               <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                 <path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" />
-               </svg>
-             <% end %>
-           <% end %>
-        </nav>
-       <% end %>
-    </div>
+              <!-- Next -->
+              <%= link_to (@grid.current_page < @grid.total_pages ? request.params.merge(page: @grid.current_page + 1) : "#"), 
+                  class: "relative inline-flex items-center px-2 py-2 rounded-r-md border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm font-medium #{@grid.current_page < @grid.total_pages ? 'text-slate-500 hover:bg-slate-50 dark:text-slate-400 dark:hover:bg-slate-700' : 'text-slate-300 cursor-not-allowed'}",
+                  disabled: @grid.current_page >= @grid.total_pages,
+                  data: { turbo_action: "advance" } do %>
+                <span class="sr-only">Next</span>
+                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" />
+                </svg>
+              <% end %>
+            </nav>
+         </div>
+      </div>
+    <% end %>
   <% end %>
 </div>
+<%# Optimized script for input debounce if needed elsewhere, but handled by stimulus in this project context %>
