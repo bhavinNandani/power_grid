@@ -29,11 +29,13 @@ module PowerGrid
     end
 
     attr_reader :params, :initial_scope
+    attr_accessor :hide_controls
 
     def initialize(params = {}, initial_scope: nil, **options)
       params = params.to_unsafe_h if params.respond_to?(:to_unsafe_h)
       @params = params.merge(options)
       @initial_scope = initial_scope
+      @hide_controls = false # Initialize to false by default
     end
 
     def records
