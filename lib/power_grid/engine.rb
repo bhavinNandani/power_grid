@@ -13,6 +13,12 @@ module PowerGrid
       end
     end
 
+    initializer "power_grid.helper" do
+      ActiveSupport.on_load(:action_view) do
+        include PowerGrid::Helper
+      end
+    end
+
     # Removed importmap auto-configuration to prevent "Is a directory" errors.
     # Users can pin the controller manually if needed.
   end

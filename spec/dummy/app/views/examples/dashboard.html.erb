@@ -1,0 +1,24 @@
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 bg-gray-50/50 min-h-screen">
+  <div class="mb-10">
+    <h1 class="text-3xl font-bold tracking-tight text-gray-900">Executive Dashboard</h1>
+    <p class="mt-2 text-sm text-gray-500">Overview of system activity and key metrics.</p>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+      <h2 class="text-lg font-semibold text-gray-900 mb-4">Recent Users</h2>
+      <!-- Renders simplistic version or full grid -->
+      <%= render_grid(@users_grid, toolbar: false, css: { container: "w-full border-none shadow-none" }) %>
+    </div>
+
+    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+      <h2 class="text-lg font-semibold text-gray-900 mb-4">Latest Posts</h2>
+      <%= render_grid(@posts_grid, toolbar: false, css: { container: "w-full border-none shadow-none" }) %>
+    </div>
+  </div>
+  
+  <div class="mt-8 bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+     <h2 class="text-lg font-semibold text-gray-900 mb-4">Full Report</h2>
+     <%= render_grid(@posts_grid) %>
+  end
+</div>

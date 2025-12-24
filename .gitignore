@@ -13,3 +13,9 @@
 
 *.gem
 Gemfile.lock
+
+# Ignore dummy app logs and storage
+spec/dummy/log/*
+!spec/dummy/log/.keep
+spec/dummy/storage/*
+!spec/dummy/storage/.keep

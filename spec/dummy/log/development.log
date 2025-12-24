@@ -1085,3 +1085,1767 @@ DEPRECATION WARNING: Using preview_path= option is deprecated and will be remove
   [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
   [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
   [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.9ms)[0m  [1m[35mDROP TABLE IF EXISTS "test_items"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "test_items" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "category" varchar, "active" boolean, "price" integer, "created_at" date)[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (8.7ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["category", "A"], ["active", 1], ["price", 10], ["created_at", "2023-01-01"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (1.2ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 2"], ["category", "B"], ["active", 0], ["price", 20], ["created_at", "2023-01-02"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (1.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 3"], ["category", "A"], ["active", 1], ["price", 30], ["created_at", "2023-01-03"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+--- POWERGRID RECORDS CALLED ---
+--- POWERGRID DEBUG ---
+Params: {}
+Checking Filter: category (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: active (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: price_range (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: date_range (Key: Symbol)
+Value found: nil (Blank? true)
+  [1m[36mTestItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "test_items"[0m
+  [1m[36mTestItem Load (0.1ms)[0m  [1m[34mSELECT "test_items".* FROM "test_items" LIMIT ? OFFSET ?[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTestItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM (SELECT 1 AS one FROM "test_items" LIMIT ? OFFSET ?) subquery_for_count[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.6ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["category", "A"], ["active", 1], ["price", 10], ["created_at", "2023-01-01"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 2"], ["category", "B"], ["active", 0], ["price", 20], ["created_at", "2023-01-02"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.6ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 3"], ["category", "A"], ["active", 1], ["price", 30], ["created_at", "2023-01-03"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+--- POWERGRID RECORDS CALLED ---
+--- POWERGRID DEBUG ---
+Params: {"category"=>"A"}
+Checking Filter: category (Key: Symbol)
+Value found: "A" (Blank? false)
+Checking Filter: active (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: price_range (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: date_range (Key: Symbol)
+Value found: nil (Blank? true)
+  [1m[36mTestItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "test_items" WHERE "test_items"."category" = ?[0m  [["category", "A"]]
+  [1m[36mTestItem Load (0.1ms)[0m  [1m[34mSELECT "test_items".* FROM "test_items" WHERE "test_items"."category" = ? LIMIT ? OFFSET ?[0m  [["category", "A"], ["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (2.2ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["category", "A"], ["active", 1], ["price", 10], ["created_at", "2023-01-01"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.7ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 2"], ["category", "B"], ["active", 0], ["price", 20], ["created_at", "2023-01-02"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.9ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 3"], ["category", "A"], ["active", 1], ["price", 30], ["created_at", "2023-01-03"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+--- POWERGRID RECORDS CALLED ---
+--- POWERGRID DEBUG ---
+Params: {"active"=>"true"}
+Checking Filter: category (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: active (Key: Symbol)
+Value found: "true" (Blank? false)
+Checking Filter: price_range (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: date_range (Key: Symbol)
+Value found: nil (Blank? true)
+  [1m[36mTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "test_items" WHERE "test_items"."active" = ?[0m  [["active", 1]]
+  [1m[36mTestItem Load (0.0ms)[0m  [1m[34mSELECT "test_items".* FROM "test_items" WHERE "test_items"."active" = ? LIMIT ? OFFSET ?[0m  [["active", 1], ["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (5.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["category", "A"], ["active", 1], ["price", 10], ["created_at", "2023-01-01"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 2"], ["category", "B"], ["active", 0], ["price", 20], ["created_at", "2023-01-02"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 3"], ["category", "A"], ["active", 1], ["price", 30], ["created_at", "2023-01-03"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+--- POWERGRID RECORDS CALLED ---
+--- POWERGRID DEBUG ---
+Params: {"active"=>"false"}
+Checking Filter: category (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: active (Key: Symbol)
+Value found: "false" (Blank? false)
+Checking Filter: price_range (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: date_range (Key: Symbol)
+Value found: nil (Blank? true)
+  [1m[36mTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "test_items" WHERE "test_items"."active" = ?[0m  [["active", 0]]
+  [1m[36mTestItem Load (0.0ms)[0m  [1m[34mSELECT "test_items".* FROM "test_items" WHERE "test_items"."active" = ? LIMIT ? OFFSET ?[0m  [["active", 0], ["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (2.1ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["category", "A"], ["active", 1], ["price", 10], ["created_at", "2023-01-01"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (1.6ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 2"], ["category", "B"], ["active", 0], ["price", 20], ["created_at", "2023-01-02"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 3"], ["category", "A"], ["active", 1], ["price", 30], ["created_at", "2023-01-03"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+--- POWERGRID RECORDS CALLED ---
+--- POWERGRID DEBUG ---
+Params: {"price_range_min"=>15, "price_range_max"=>25}
+Checking Filter: category (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: active (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: price_range (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: date_range (Key: Symbol)
+Value found: nil (Blank? true)
+  [1m[36mTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "test_items"[0m
+  [1m[36mTestItem Load (0.0ms)[0m  [1m[34mSELECT "test_items".* FROM "test_items" LIMIT ? OFFSET ?[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.5ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["category", "A"], ["active", 1], ["price", 10], ["created_at", "2023-01-01"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.5ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 2"], ["category", "B"], ["active", 0], ["price", 20], ["created_at", "2023-01-02"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 3"], ["category", "A"], ["active", 1], ["price", 30], ["created_at", "2023-01-03"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+--- POWERGRID RECORDS CALLED ---
+--- POWERGRID DEBUG ---
+Params: {"price_range_min"=>25}
+Checking Filter: category (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: active (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: price_range (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: date_range (Key: Symbol)
+Value found: nil (Blank? true)
+  [1m[36mTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "test_items"[0m
+  [1m[36mTestItem Load (0.0ms)[0m  [1m[34mSELECT "test_items".* FROM "test_items" LIMIT ? OFFSET ?[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["category", "A"], ["active", 1], ["price", 10], ["created_at", "2023-01-01"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 2"], ["category", "B"], ["active", 0], ["price", 20], ["created_at", "2023-01-02"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 3"], ["category", "A"], ["active", 1], ["price", 30], ["created_at", "2023-01-03"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+--- POWERGRID RECORDS CALLED ---
+--- POWERGRID DEBUG ---
+Params: {"price_range_max"=>15}
+Checking Filter: category (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: active (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: price_range (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: date_range (Key: Symbol)
+Value found: nil (Blank? true)
+  [1m[36mTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "test_items"[0m
+  [1m[36mTestItem Load (0.0ms)[0m  [1m[34mSELECT "test_items".* FROM "test_items" LIMIT ? OFFSET ?[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["category", "A"], ["active", 1], ["price", 10], ["created_at", "2023-01-01"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 2"], ["category", "B"], ["active", 0], ["price", 20], ["created_at", "2023-01-02"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 3"], ["category", "A"], ["active", 1], ["price", 30], ["created_at", "2023-01-03"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+--- POWERGRID RECORDS CALLED ---
+--- POWERGRID DEBUG ---
+Params: {"date_range"=>"2023-01-02 to 2023-01-03"}
+Checking Filter: category (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: active (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: price_range (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: date_range (Key: Symbol)
+Value found: "2023-01-02 to 2023-01-03" (Blank? false)
+  [1m[36mTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "test_items" WHERE "test_items"."created_at" BETWEEN ? AND ?[0m  [["created_at", "2023-01-02"], ["created_at", "2023-01-03"]]
+  [1m[36mTestItem Load (0.0ms)[0m  [1m[34mSELECT "test_items".* FROM "test_items" WHERE "test_items"."created_at" BETWEEN ? AND ? LIMIT ? OFFSET ?[0m  [["created_at", "2023-01-02"], ["created_at", "2023-01-03"], ["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["category", "A"], ["active", 1], ["price", 10], ["created_at", "2023-01-01"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 2"], ["category", "B"], ["active", 0], ["price", 20], ["created_at", "2023-01-02"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 3"], ["category", "A"], ["active", 1], ["price", 30], ["created_at", "2023-01-03"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "test_items"[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.6ms)[0m  [1m[35mDROP TABLE IF EXISTS "test_items"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "test_items" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "category" varchar, "active" boolean, "price" integer, "created_at" date)[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.5ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["category", "A"], ["active", 1], ["price", 10], ["created_at", "2023-01-01"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 2"], ["category", "B"], ["active", 0], ["price", 20], ["created_at", "2023-01-02"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 3"], ["category", "A"], ["active", 1], ["price", 30], ["created_at", "2023-01-03"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+--- POWERGRID RECORDS CALLED ---
+--- POWERGRID DEBUG ---
+Params: {}
+Checking Filter: category (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: active (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: price_range (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: date_range (Key: Symbol)
+Value found: nil (Blank? true)
+  [1m[36mTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "test_items"[0m
+  [1m[36mTestItem Load (0.0ms)[0m  [1m[34mSELECT "test_items".* FROM "test_items" LIMIT ? OFFSET ?[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTestItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM (SELECT 1 AS one FROM "test_items" LIMIT ? OFFSET ?) subquery_for_count[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["category", "A"], ["active", 1], ["price", 10], ["created_at", "2023-01-01"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 2"], ["category", "B"], ["active", 0], ["price", 20], ["created_at", "2023-01-02"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.3ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 3"], ["category", "A"], ["active", 1], ["price", 30], ["created_at", "2023-01-03"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+--- POWERGRID RECORDS CALLED ---
+--- POWERGRID DEBUG ---
+Params: {"category"=>"A"}
+Checking Filter: category (Key: Symbol)
+Value found: "A" (Blank? false)
+Checking Filter: active (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: price_range (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: date_range (Key: Symbol)
+Value found: nil (Blank? true)
+  [1m[36mTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "test_items" WHERE "test_items"."category" = ?[0m  [["category", "A"]]
+  [1m[36mTestItem Load (0.0ms)[0m  [1m[34mSELECT "test_items".* FROM "test_items" WHERE "test_items"."category" = ? LIMIT ? OFFSET ?[0m  [["category", "A"], ["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["category", "A"], ["active", 1], ["price", 10], ["created_at", "2023-01-01"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 2"], ["category", "B"], ["active", 0], ["price", 20], ["created_at", "2023-01-02"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 3"], ["category", "A"], ["active", 1], ["price", 30], ["created_at", "2023-01-03"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+--- POWERGRID RECORDS CALLED ---
+--- POWERGRID DEBUG ---
+Params: {"active"=>"true"}
+Checking Filter: category (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: active (Key: Symbol)
+Value found: "true" (Blank? false)
+Checking Filter: price_range (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: date_range (Key: Symbol)
+Value found: nil (Blank? true)
+  [1m[36mTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "test_items" WHERE "test_items"."active" = ?[0m  [["active", 1]]
+  [1m[36mTestItem Load (0.0ms)[0m  [1m[34mSELECT "test_items".* FROM "test_items" WHERE "test_items"."active" = ? LIMIT ? OFFSET ?[0m  [["active", 1], ["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.5ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["category", "A"], ["active", 1], ["price", 10], ["created_at", "2023-01-01"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 2"], ["category", "B"], ["active", 0], ["price", 20], ["created_at", "2023-01-02"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 3"], ["category", "A"], ["active", 1], ["price", 30], ["created_at", "2023-01-03"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+--- POWERGRID RECORDS CALLED ---
+--- POWERGRID DEBUG ---
+Params: {"active"=>"false"}
+Checking Filter: category (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: active (Key: Symbol)
+Value found: "false" (Blank? false)
+Checking Filter: price_range (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: date_range (Key: Symbol)
+Value found: nil (Blank? true)
+  [1m[36mTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "test_items" WHERE "test_items"."active" = ?[0m  [["active", 0]]
+  [1m[36mTestItem Load (0.0ms)[0m  [1m[34mSELECT "test_items".* FROM "test_items" WHERE "test_items"."active" = ? LIMIT ? OFFSET ?[0m  [["active", 0], ["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["category", "A"], ["active", 1], ["price", 10], ["created_at", "2023-01-01"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 2"], ["category", "B"], ["active", 0], ["price", 20], ["created_at", "2023-01-02"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 3"], ["category", "A"], ["active", 1], ["price", 30], ["created_at", "2023-01-03"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+--- POWERGRID RECORDS CALLED ---
+--- POWERGRID DEBUG ---
+Params: {"price_range_min"=>15, "price_range_max"=>25}
+Checking Filter: category (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: active (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: price_range (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: date_range (Key: Symbol)
+Value found: nil (Blank? true)
+  [1m[36mTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "test_items"[0m
+  [1m[36mTestItem Load (0.0ms)[0m  [1m[34mSELECT "test_items".* FROM "test_items" LIMIT ? OFFSET ?[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["category", "A"], ["active", 1], ["price", 10], ["created_at", "2023-01-01"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 2"], ["category", "B"], ["active", 0], ["price", 20], ["created_at", "2023-01-02"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 3"], ["category", "A"], ["active", 1], ["price", 30], ["created_at", "2023-01-03"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+--- POWERGRID RECORDS CALLED ---
+--- POWERGRID DEBUG ---
+Params: {"price_range_min"=>25}
+Checking Filter: category (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: active (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: price_range (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: date_range (Key: Symbol)
+Value found: nil (Blank? true)
+  [1m[36mTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "test_items"[0m
+  [1m[36mTestItem Load (0.0ms)[0m  [1m[34mSELECT "test_items".* FROM "test_items" LIMIT ? OFFSET ?[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["category", "A"], ["active", 1], ["price", 10], ["created_at", "2023-01-01"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.5ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 2"], ["category", "B"], ["active", 0], ["price", 20], ["created_at", "2023-01-02"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (4.5ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 3"], ["category", "A"], ["active", 1], ["price", 30], ["created_at", "2023-01-03"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+--- POWERGRID RECORDS CALLED ---
+--- POWERGRID DEBUG ---
+Params: {"price_range_max"=>15}
+Checking Filter: category (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: active (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: price_range (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: date_range (Key: Symbol)
+Value found: nil (Blank? true)
+  [1m[36mTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "test_items"[0m
+  [1m[36mTestItem Load (0.0ms)[0m  [1m[34mSELECT "test_items".* FROM "test_items" LIMIT ? OFFSET ?[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["category", "A"], ["active", 1], ["price", 10], ["created_at", "2023-01-01"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 2"], ["category", "B"], ["active", 0], ["price", 20], ["created_at", "2023-01-02"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 3"], ["category", "A"], ["active", 1], ["price", 30], ["created_at", "2023-01-03"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+--- POWERGRID RECORDS CALLED ---
+--- POWERGRID DEBUG ---
+Params: {"date_range"=>"2023-01-02 to 2023-01-03"}
+Checking Filter: category (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: active (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: price_range (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: date_range (Key: Symbol)
+Value found: "2023-01-02 to 2023-01-03" (Blank? false)
+  [1m[36mTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "test_items" WHERE "test_items"."created_at" BETWEEN ? AND ?[0m  [["created_at", "2023-01-02"], ["created_at", "2023-01-03"]]
+  [1m[36mTestItem Load (0.0ms)[0m  [1m[34mSELECT "test_items".* FROM "test_items" WHERE "test_items"."created_at" BETWEEN ? AND ? LIMIT ? OFFSET ?[0m  [["created_at", "2023-01-02"], ["created_at", "2023-01-03"], ["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["category", "A"], ["active", 1], ["price", 10], ["created_at", "2023-01-01"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 2"], ["category", "B"], ["active", 0], ["price", 20], ["created_at", "2023-01-02"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 3"], ["category", "A"], ["active", 1], ["price", 30], ["created_at", "2023-01-03"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+--- POWERGRID RECORDS CALLED ---
+--- POWERGRID DEBUG ---
+Params: {}
+Checking Filter: category (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: active (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: price_range (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: date_range (Key: Symbol)
+Value found: nil (Blank? true)
+  [1m[36mTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "test_items"[0m
+  [1m[36mTestItem Load (0.0ms)[0m  [1m[34mSELECT "test_items".* FROM "test_items" LIMIT ? OFFSET ?[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "test_items"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "component_test_items"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "component_test_items" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "active" boolean)[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mComponentTestItem Create (0.3ms)[0m  [1m[32mINSERT INTO "component_test_items" ("name", "active") VALUES (?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+--- POWERGRID RECORDS CALLED ---
+--- POWERGRID DEBUG ---
+Params: {}
+Checking Filter: name (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: active (Key: Symbol)
+Value found: nil (Blank? true)
+  [1m[36mComponentTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "component_test_items"[0m
+  [1m[36mComponentTestItem Load (0.0ms)[0m  [1m[34mSELECT "component_test_items".* FROM "component_test_items" LIMIT ? OFFSET ?[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+--- POWERGRID RECORDS CALLED ---
+--- POWERGRID DEBUG ---
+Params: {}
+Checking Filter: name (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: active (Key: Symbol)
+Value found: nil (Blank? true)
+  [1m[36mComponentTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "component_test_items"[0m
+  [1m[36mComponentTestItem Load (0.0ms)[0m  [1m[34mSELECT "component_test_items".* FROM "component_test_items" LIMIT ? OFFSET ?[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "component_test_items"[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.6ms)[0m  [1m[35mDROP TABLE IF EXISTS "test_items"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "test_items" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "category" varchar, "active" boolean, "price" integer, "created_at" date)[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.6ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["category", "A"], ["active", 1], ["price", 10], ["created_at", "2023-01-01"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (2.2ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 2"], ["category", "B"], ["active", 0], ["price", 20], ["created_at", "2023-01-02"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (2.1ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 3"], ["category", "A"], ["active", 1], ["price", 30], ["created_at", "2023-01-03"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+--- POWERGRID RECORDS CALLED ---
+--- POWERGRID DEBUG ---
+Params: {}
+Checking Filter: category (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: active (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: price_range (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: date_range (Key: Symbol)
+Value found: nil (Blank? true)
+  [1m[36mTestItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "test_items"[0m
+  [1m[36mTestItem Load (0.7ms)[0m  [1m[34mSELECT "test_items".* FROM "test_items" LIMIT ? OFFSET ?[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTestItem Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM (SELECT 1 AS one FROM "test_items" LIMIT ? OFFSET ?) subquery_for_count[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (1.3ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["category", "A"], ["active", 1], ["price", 10], ["created_at", "2023-01-01"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (1.2ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 2"], ["category", "B"], ["active", 0], ["price", 20], ["created_at", "2023-01-02"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 3"], ["category", "A"], ["active", 1], ["price", 30], ["created_at", "2023-01-03"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+--- POWERGRID RECORDS CALLED ---
+--- POWERGRID DEBUG ---
+Params: {"category"=>"A"}
+Checking Filter: category (Key: Symbol)
+Value found: "A" (Blank? false)
+Checking Filter: active (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: price_range (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: date_range (Key: Symbol)
+Value found: nil (Blank? true)
+  [1m[36mTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "test_items" WHERE "test_items"."category" = ?[0m  [["category", "A"]]
+  [1m[36mTestItem Load (0.0ms)[0m  [1m[34mSELECT "test_items".* FROM "test_items" WHERE "test_items"."category" = ? LIMIT ? OFFSET ?[0m  [["category", "A"], ["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.5ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["category", "A"], ["active", 1], ["price", 10], ["created_at", "2023-01-01"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (2.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 2"], ["category", "B"], ["active", 0], ["price", 20], ["created_at", "2023-01-02"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (2.9ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 3"], ["category", "A"], ["active", 1], ["price", 30], ["created_at", "2023-01-03"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+--- POWERGRID RECORDS CALLED ---
+--- POWERGRID DEBUG ---
+Params: {"active"=>"true"}
+Checking Filter: category (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: active (Key: Symbol)
+Value found: "true" (Blank? false)
+Checking Filter: price_range (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: date_range (Key: Symbol)
+Value found: nil (Blank? true)
+  [1m[36mTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "test_items" WHERE "test_items"."active" = ?[0m  [["active", 1]]
+  [1m[36mTestItem Load (0.0ms)[0m  [1m[34mSELECT "test_items".* FROM "test_items" WHERE "test_items"."active" = ? LIMIT ? OFFSET ?[0m  [["active", 1], ["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["category", "A"], ["active", 1], ["price", 10], ["created_at", "2023-01-01"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.6ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 2"], ["category", "B"], ["active", 0], ["price", 20], ["created_at", "2023-01-02"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (1.0ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 3"], ["category", "A"], ["active", 1], ["price", 30], ["created_at", "2023-01-03"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+--- POWERGRID RECORDS CALLED ---
+--- POWERGRID DEBUG ---
+Params: {"active"=>"false"}
+Checking Filter: category (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: active (Key: Symbol)
+Value found: "false" (Blank? false)
+Checking Filter: price_range (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: date_range (Key: Symbol)
+Value found: nil (Blank? true)
+  [1m[36mTestItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "test_items" WHERE "test_items"."active" = ?[0m  [["active", 0]]
+  [1m[36mTestItem Load (0.0ms)[0m  [1m[34mSELECT "test_items".* FROM "test_items" WHERE "test_items"."active" = ? LIMIT ? OFFSET ?[0m  [["active", 0], ["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (1.6ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["category", "A"], ["active", 1], ["price", 10], ["created_at", "2023-01-01"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.7ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 2"], ["category", "B"], ["active", 0], ["price", 20], ["created_at", "2023-01-02"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 3"], ["category", "A"], ["active", 1], ["price", 30], ["created_at", "2023-01-03"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+--- POWERGRID RECORDS CALLED ---
+--- POWERGRID DEBUG ---
+Params: {"price_range_min"=>15, "price_range_max"=>25}
+Checking Filter: category (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: active (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: price_range (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: date_range (Key: Symbol)
+Value found: nil (Blank? true)
+  [1m[36mTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "test_items" WHERE "test_items"."price" BETWEEN ? AND ?[0m  [["price", 15], ["price", 25]]
+  [1m[36mTestItem Load (0.0ms)[0m  [1m[34mSELECT "test_items".* FROM "test_items" WHERE "test_items"."price" BETWEEN ? AND ? LIMIT ? OFFSET ?[0m  [["price", 15], ["price", 25], ["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["category", "A"], ["active", 1], ["price", 10], ["created_at", "2023-01-01"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 2"], ["category", "B"], ["active", 0], ["price", 20], ["created_at", "2023-01-02"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 3"], ["category", "A"], ["active", 1], ["price", 30], ["created_at", "2023-01-03"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+--- POWERGRID RECORDS CALLED ---
+--- POWERGRID DEBUG ---
+Params: {"price_range_min"=>25}
+Checking Filter: category (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: active (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: price_range (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: date_range (Key: Symbol)
+Value found: nil (Blank? true)
+  [1m[36mTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "test_items" WHERE (price >= 25)[0m
+  [1m[36mTestItem Load (0.1ms)[0m  [1m[34mSELECT "test_items".* FROM "test_items" WHERE (price >= 25) LIMIT ? OFFSET ?[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.6ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["category", "A"], ["active", 1], ["price", 10], ["created_at", "2023-01-01"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 2"], ["category", "B"], ["active", 0], ["price", 20], ["created_at", "2023-01-02"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 3"], ["category", "A"], ["active", 1], ["price", 30], ["created_at", "2023-01-03"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+--- POWERGRID RECORDS CALLED ---
+--- POWERGRID DEBUG ---
+Params: {"price_range_max"=>15}
+Checking Filter: category (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: active (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: price_range (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: date_range (Key: Symbol)
+Value found: nil (Blank? true)
+  [1m[36mTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "test_items" WHERE (price <= 15)[0m
+  [1m[36mTestItem Load (0.0ms)[0m  [1m[34mSELECT "test_items".* FROM "test_items" WHERE (price <= 15) LIMIT ? OFFSET ?[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.8ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["category", "A"], ["active", 1], ["price", 10], ["created_at", "2023-01-01"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 2"], ["category", "B"], ["active", 0], ["price", 20], ["created_at", "2023-01-02"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 3"], ["category", "A"], ["active", 1], ["price", 30], ["created_at", "2023-01-03"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+--- POWERGRID RECORDS CALLED ---
+--- POWERGRID DEBUG ---
+Params: {"date_range"=>"2023-01-02 to 2023-01-03"}
+Checking Filter: category (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: active (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: price_range (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: date_range (Key: Symbol)
+Value found: "2023-01-02 to 2023-01-03" (Blank? false)
+  [1m[36mTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "test_items" WHERE "test_items"."created_at" BETWEEN ? AND ?[0m  [["created_at", "2023-01-02"], ["created_at", "2023-01-03"]]
+  [1m[36mTestItem Load (0.0ms)[0m  [1m[34mSELECT "test_items".* FROM "test_items" WHERE "test_items"."created_at" BETWEEN ? AND ? LIMIT ? OFFSET ?[0m  [["created_at", "2023-01-02"], ["created_at", "2023-01-03"], ["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["category", "A"], ["active", 1], ["price", 10], ["created_at", "2023-01-01"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 2"], ["category", "B"], ["active", 0], ["price", 20], ["created_at", "2023-01-02"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 3"], ["category", "A"], ["active", 1], ["price", 30], ["created_at", "2023-01-03"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+--- POWERGRID RECORDS CALLED ---
+--- POWERGRID DEBUG ---
+Params: {}
+Checking Filter: category (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: active (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: price_range (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: date_range (Key: Symbol)
+Value found: nil (Blank? true)
+  [1m[36mTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "test_items"[0m
+  [1m[36mTestItem Load (0.0ms)[0m  [1m[34mSELECT "test_items".* FROM "test_items" LIMIT ? OFFSET ?[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE "test_items"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "component_test_items"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "component_test_items" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "active" boolean)[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mComponentTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "component_test_items" ("name", "active") VALUES (?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+--- POWERGRID RECORDS CALLED ---
+--- POWERGRID DEBUG ---
+Params: {}
+Checking Filter: name (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: active (Key: Symbol)
+Value found: nil (Blank? true)
+  [1m[36mComponentTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "component_test_items"[0m
+  [1m[36mComponentTestItem Load (0.0ms)[0m  [1m[34mSELECT "component_test_items".* FROM "component_test_items" LIMIT ? OFFSET ?[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+--- POWERGRID RECORDS CALLED ---
+--- POWERGRID DEBUG ---
+Params: {}
+Checking Filter: name (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: active (Key: Symbol)
+Value found: nil (Blank? true)
+  [1m[36mComponentTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "component_test_items"[0m
+  [1m[36mComponentTestItem Load (0.0ms)[0m  [1m[34mSELECT "component_test_items".* FROM "component_test_items" LIMIT ? OFFSET ?[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "component_test_items"[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.6ms)[0m  [1m[35mDROP TABLE IF EXISTS "component_test_items"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "component_test_items" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "active" boolean)[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mComponentTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "component_test_items" ("name", "active") VALUES (?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+--- POWERGRID RECORDS CALLED ---
+--- POWERGRID DEBUG ---
+Params: {}
+Checking Filter: name (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: active (Key: Symbol)
+Value found: nil (Blank? true)
+  [1m[36mComponentTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "component_test_items"[0m
+  [1m[36mComponentTestItem Load (0.0ms)[0m  [1m[34mSELECT "component_test_items".* FROM "component_test_items" LIMIT ? OFFSET ?[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+--- POWERGRID RECORDS CALLED ---
+--- POWERGRID DEBUG ---
+Params: {}
+Checking Filter: name (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: active (Key: Symbol)
+Value found: nil (Blank? true)
+  [1m[36mComponentTestItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "component_test_items"[0m
+  [1m[36mComponentTestItem Load (0.0ms)[0m  [1m[34mSELECT "component_test_items".* FROM "component_test_items" LIMIT ? OFFSET ?[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "component_test_items"[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.6ms)[0m  [1m[35mDROP TABLE IF EXISTS "component_test_items"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "component_test_items" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "active" boolean)[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mComponentTestItem Create (1.3ms)[0m  [1m[32mINSERT INTO "component_test_items" ("name", "active") VALUES (?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+--- POWERGRID RECORDS CALLED ---
+--- POWERGRID DEBUG ---
+Params: {}
+Checking Filter: name (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: active (Key: Symbol)
+Value found: nil (Blank? true)
+  [1m[36mComponentTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "component_test_items"[0m
+  [1m[36mComponentTestItem Load (0.0ms)[0m  [1m[34mSELECT "component_test_items".* FROM "component_test_items" LIMIT ? OFFSET ?[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+--- POWERGRID RECORDS CALLED ---
+--- POWERGRID DEBUG ---
+Params: {}
+Checking Filter: name (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: active (Key: Symbol)
+Value found: nil (Blank? true)
+  [1m[36mComponentTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "component_test_items"[0m
+  [1m[36mComponentTestItem Load (0.0ms)[0m  [1m[34mSELECT "component_test_items".* FROM "component_test_items" LIMIT ? OFFSET ?[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "component_test_items"[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.6ms)[0m  [1m[35mDROP TABLE IF EXISTS "component_test_items"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "component_test_items" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "active" boolean)[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mComponentTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "component_test_items" ("name", "active") VALUES (?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+--- POWERGRID RECORDS CALLED ---
+--- POWERGRID DEBUG ---
+Params: {}
+Checking Filter: name (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: active (Key: Symbol)
+Value found: nil (Blank? true)
+  [1m[36mComponentTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "component_test_items"[0m
+  [1m[36mComponentTestItem Load (0.0ms)[0m  [1m[34mSELECT "component_test_items".* FROM "component_test_items" LIMIT ? OFFSET ?[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+--- POWERGRID RECORDS CALLED ---
+--- POWERGRID DEBUG ---
+Params: {}
+Checking Filter: name (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: active (Key: Symbol)
+Value found: nil (Blank? true)
+  [1m[36mComponentTestItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "component_test_items"[0m
+  [1m[36mComponentTestItem Load (0.0ms)[0m  [1m[34mSELECT "component_test_items".* FROM "component_test_items" LIMIT ? OFFSET ?[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "component_test_items"[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.6ms)[0m  [1m[35mDROP TABLE IF EXISTS "component_test_items"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "component_test_items" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "active" boolean)[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mComponentTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "component_test_items" ("name", "active") VALUES (?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+--- POWERGRID RECORDS CALLED ---
+--- POWERGRID DEBUG ---
+Params: {}
+Checking Filter: name (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: active (Key: Symbol)
+Value found: nil (Blank? true)
+  [1m[36mComponentTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "component_test_items"[0m
+  [1m[36mComponentTestItem Load (0.0ms)[0m  [1m[34mSELECT "component_test_items".* FROM "component_test_items" LIMIT ? OFFSET ?[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+--- POWERGRID RECORDS CALLED ---
+--- POWERGRID DEBUG ---
+Params: {}
+Checking Filter: name (Key: Symbol)
+Value found: nil (Blank? true)
+Checking Filter: active (Key: Symbol)
+Value found: nil (Blank? true)
+  [1m[36mComponentTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "component_test_items"[0m
+  [1m[36mComponentTestItem Load (0.0ms)[0m  [1m[34mSELECT "component_test_items".* FROM "component_test_items" LIMIT ? OFFSET ?[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "component_test_items"[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "test_items"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "test_items" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "category" varchar, "active" boolean, "price" integer, "created_at" date)[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["category", "A"], ["active", 1], ["price", 10], ["created_at", "2023-01-01"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 2"], ["category", "B"], ["active", 0], ["price", 20], ["created_at", "2023-01-02"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.3ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 3"], ["category", "A"], ["active", 1], ["price", 30], ["created_at", "2023-01-03"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "test_items"[0m
+  [1m[36mTestItem Load (0.0ms)[0m  [1m[34mSELECT "test_items".* FROM "test_items" LIMIT ? OFFSET ?[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTestItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM (SELECT 1 AS one FROM "test_items" LIMIT ? OFFSET ?) subquery_for_count[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["category", "A"], ["active", 1], ["price", 10], ["created_at", "2023-01-01"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 2"], ["category", "B"], ["active", 0], ["price", 20], ["created_at", "2023-01-02"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 3"], ["category", "A"], ["active", 1], ["price", 30], ["created_at", "2023-01-03"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "test_items" WHERE "test_items"."category" = ?[0m  [["category", "A"]]
+  [1m[36mTestItem Load (0.0ms)[0m  [1m[34mSELECT "test_items".* FROM "test_items" WHERE "test_items"."category" = ? LIMIT ? OFFSET ?[0m  [["category", "A"], ["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["category", "A"], ["active", 1], ["price", 10], ["created_at", "2023-01-01"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 2"], ["category", "B"], ["active", 0], ["price", 20], ["created_at", "2023-01-02"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.3ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 3"], ["category", "A"], ["active", 1], ["price", 30], ["created_at", "2023-01-03"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "test_items" WHERE "test_items"."active" = ?[0m  [["active", 1]]
+  [1m[36mTestItem Load (0.0ms)[0m  [1m[34mSELECT "test_items".* FROM "test_items" WHERE "test_items"."active" = ? LIMIT ? OFFSET ?[0m  [["active", 1], ["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["category", "A"], ["active", 1], ["price", 10], ["created_at", "2023-01-01"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.3ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 2"], ["category", "B"], ["active", 0], ["price", 20], ["created_at", "2023-01-02"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.3ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 3"], ["category", "A"], ["active", 1], ["price", 30], ["created_at", "2023-01-03"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "test_items" WHERE "test_items"."active" = ?[0m  [["active", 0]]
+  [1m[36mTestItem Load (0.0ms)[0m  [1m[34mSELECT "test_items".* FROM "test_items" WHERE "test_items"."active" = ? LIMIT ? OFFSET ?[0m  [["active", 0], ["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.3ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["category", "A"], ["active", 1], ["price", 10], ["created_at", "2023-01-01"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 2"], ["category", "B"], ["active", 0], ["price", 20], ["created_at", "2023-01-02"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 3"], ["category", "A"], ["active", 1], ["price", 30], ["created_at", "2023-01-03"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "test_items" WHERE "test_items"."price" BETWEEN ? AND ?[0m  [["price", 15], ["price", 25]]
+  [1m[36mTestItem Load (0.0ms)[0m  [1m[34mSELECT "test_items".* FROM "test_items" WHERE "test_items"."price" BETWEEN ? AND ? LIMIT ? OFFSET ?[0m  [["price", 15], ["price", 25], ["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["category", "A"], ["active", 1], ["price", 10], ["created_at", "2023-01-01"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 2"], ["category", "B"], ["active", 0], ["price", 20], ["created_at", "2023-01-02"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 3"], ["category", "A"], ["active", 1], ["price", 30], ["created_at", "2023-01-03"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "test_items" WHERE (price >= 25)[0m
+  [1m[36mTestItem Load (0.0ms)[0m  [1m[34mSELECT "test_items".* FROM "test_items" WHERE (price >= 25) LIMIT ? OFFSET ?[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["category", "A"], ["active", 1], ["price", 10], ["created_at", "2023-01-01"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 2"], ["category", "B"], ["active", 0], ["price", 20], ["created_at", "2023-01-02"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.3ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 3"], ["category", "A"], ["active", 1], ["price", 30], ["created_at", "2023-01-03"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "test_items" WHERE (price <= 15)[0m
+  [1m[36mTestItem Load (0.0ms)[0m  [1m[34mSELECT "test_items".* FROM "test_items" WHERE (price <= 15) LIMIT ? OFFSET ?[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["category", "A"], ["active", 1], ["price", 10], ["created_at", "2023-01-01"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 2"], ["category", "B"], ["active", 0], ["price", 20], ["created_at", "2023-01-02"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.6ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 3"], ["category", "A"], ["active", 1], ["price", 30], ["created_at", "2023-01-03"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "test_items" WHERE "test_items"."created_at" BETWEEN ? AND ?[0m  [["created_at", "2023-01-02"], ["created_at", "2023-01-03"]]
+  [1m[36mTestItem Load (0.0ms)[0m  [1m[34mSELECT "test_items".* FROM "test_items" WHERE "test_items"."created_at" BETWEEN ? AND ? LIMIT ? OFFSET ?[0m  [["created_at", "2023-01-02"], ["created_at", "2023-01-03"], ["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["category", "A"], ["active", 1], ["price", 10], ["created_at", "2023-01-01"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.3ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 2"], ["category", "B"], ["active", 0], ["price", 20], ["created_at", "2023-01-02"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 3"], ["category", "A"], ["active", 1], ["price", 30], ["created_at", "2023-01-03"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "test_items"[0m
+  [1m[36mTestItem Load (0.0ms)[0m  [1m[34mSELECT "test_items".* FROM "test_items" LIMIT ? OFFSET ?[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "test_items"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "component_test_items"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "component_test_items" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "active" boolean)[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mComponentTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "component_test_items" ("name", "active") VALUES (?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mComponentTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "component_test_items"[0m
+  [1m[36mComponentTestItem Load (0.0ms)[0m  [1m[34mSELECT "component_test_items".* FROM "component_test_items" LIMIT ? OFFSET ?[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mComponentTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "component_test_items"[0m
+  [1m[36mComponentTestItem Load (0.0ms)[0m  [1m[34mSELECT "component_test_items".* FROM "component_test_items" LIMIT ? OFFSET ?[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "component_test_items"[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (1.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "component_test_items"[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "component_test_items" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "active" boolean)[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mComponentTestItem Create (4.0ms)[0m  [1m[32mINSERT INTO "component_test_items" ("name", "active") VALUES (?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mComponentTestItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "component_test_items"[0m
+  [1m[36mComponentTestItem Load (0.1ms)[0m  [1m[34mSELECT "component_test_items".* FROM "component_test_items" LIMIT ? OFFSET ?[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mComponentTestItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "component_test_items"[0m
+  [1m[36mComponentTestItem Load (0.1ms)[0m  [1m[34mSELECT "component_test_items".* FROM "component_test_items" LIMIT ? OFFSET ?[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "component_test_items"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "test_items"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "test_items" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "category" varchar, "active" boolean, "price" integer, "created_at" date)[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (1.1ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["category", "A"], ["active", 1], ["price", 10], ["created_at", "2023-01-01"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.5ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 2"], ["category", "B"], ["active", 0], ["price", 20], ["created_at", "2023-01-02"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.5ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 3"], ["category", "A"], ["active", 1], ["price", 30], ["created_at", "2023-01-03"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "test_items"[0m
+  [1m[36mTestItem Load (0.0ms)[0m  [1m[34mSELECT "test_items".* FROM "test_items" LIMIT ? OFFSET ?[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM (SELECT 1 AS one FROM "test_items" LIMIT ? OFFSET ?) subquery_for_count[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.5ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["category", "A"], ["active", 1], ["price", 10], ["created_at", "2023-01-01"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.5ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 2"], ["category", "B"], ["active", 0], ["price", 20], ["created_at", "2023-01-02"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.5ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 3"], ["category", "A"], ["active", 1], ["price", 30], ["created_at", "2023-01-03"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTestItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "test_items" WHERE "test_items"."category" = ?[0m  [["category", "A"]]
+  [1m[36mTestItem Load (0.0ms)[0m  [1m[34mSELECT "test_items".* FROM "test_items" WHERE "test_items"."category" = ? LIMIT ? OFFSET ?[0m  [["category", "A"], ["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.5ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["category", "A"], ["active", 1], ["price", 10], ["created_at", "2023-01-01"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.5ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 2"], ["category", "B"], ["active", 0], ["price", 20], ["created_at", "2023-01-02"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 3"], ["category", "A"], ["active", 1], ["price", 30], ["created_at", "2023-01-03"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "test_items" WHERE "test_items"."active" = ?[0m  [["active", 1]]
+  [1m[36mTestItem Load (0.0ms)[0m  [1m[34mSELECT "test_items".* FROM "test_items" WHERE "test_items"."active" = ? LIMIT ? OFFSET ?[0m  [["active", 1], ["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.5ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["category", "A"], ["active", 1], ["price", 10], ["created_at", "2023-01-01"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.5ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 2"], ["category", "B"], ["active", 0], ["price", 20], ["created_at", "2023-01-02"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.6ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 3"], ["category", "A"], ["active", 1], ["price", 30], ["created_at", "2023-01-03"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "test_items" WHERE "test_items"."active" = ?[0m  [["active", 0]]
+  [1m[36mTestItem Load (0.0ms)[0m  [1m[34mSELECT "test_items".* FROM "test_items" WHERE "test_items"."active" = ? LIMIT ? OFFSET ?[0m  [["active", 0], ["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["category", "A"], ["active", 1], ["price", 10], ["created_at", "2023-01-01"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (1.8ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 2"], ["category", "B"], ["active", 0], ["price", 20], ["created_at", "2023-01-02"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 3"], ["category", "A"], ["active", 1], ["price", 30], ["created_at", "2023-01-03"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "test_items" WHERE "test_items"."price" BETWEEN ? AND ?[0m  [["price", 15], ["price", 25]]
+  [1m[36mTestItem Load (0.0ms)[0m  [1m[34mSELECT "test_items".* FROM "test_items" WHERE "test_items"."price" BETWEEN ? AND ? LIMIT ? OFFSET ?[0m  [["price", 15], ["price", 25], ["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.9ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["category", "A"], ["active", 1], ["price", 10], ["created_at", "2023-01-01"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 2"], ["category", "B"], ["active", 0], ["price", 20], ["created_at", "2023-01-02"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 3"], ["category", "A"], ["active", 1], ["price", 30], ["created_at", "2023-01-03"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "test_items" WHERE (price >= 25)[0m
+  [1m[36mTestItem Load (0.0ms)[0m  [1m[34mSELECT "test_items".* FROM "test_items" WHERE (price >= 25) LIMIT ? OFFSET ?[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.5ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["category", "A"], ["active", 1], ["price", 10], ["created_at", "2023-01-01"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.7ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 2"], ["category", "B"], ["active", 0], ["price", 20], ["created_at", "2023-01-02"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 3"], ["category", "A"], ["active", 1], ["price", 30], ["created_at", "2023-01-03"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "test_items" WHERE (price <= 15)[0m
+  [1m[36mTestItem Load (0.0ms)[0m  [1m[34mSELECT "test_items".* FROM "test_items" WHERE (price <= 15) LIMIT ? OFFSET ?[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.5ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["category", "A"], ["active", 1], ["price", 10], ["created_at", "2023-01-01"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.6ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 2"], ["category", "B"], ["active", 0], ["price", 20], ["created_at", "2023-01-02"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (1.0ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 3"], ["category", "A"], ["active", 1], ["price", 30], ["created_at", "2023-01-03"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTestItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "test_items" WHERE "test_items"."created_at" BETWEEN ? AND ?[0m  [["created_at", "2023-01-02"], ["created_at", "2023-01-03"]]
+  [1m[36mTestItem Load (0.0ms)[0m  [1m[34mSELECT "test_items".* FROM "test_items" WHERE "test_items"."created_at" BETWEEN ? AND ? LIMIT ? OFFSET ?[0m  [["created_at", "2023-01-02"], ["created_at", "2023-01-03"], ["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.5ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["category", "A"], ["active", 1], ["price", 10], ["created_at", "2023-01-01"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 2"], ["category", "B"], ["active", 0], ["price", 20], ["created_at", "2023-01-02"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.5ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 3"], ["category", "A"], ["active", 1], ["price", 30], ["created_at", "2023-01-03"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "test_items"[0m
+  [1m[36mTestItem Load (0.1ms)[0m  [1m[34mSELECT "test_items".* FROM "test_items" LIMIT ? OFFSET ?[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "test_items"[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPost Delete All (0.1ms)[0m  [1m[31mDELETE FROM "posts"[0m
+  [1m[36mUser Delete All (0.1ms)[0m  [1m[31mDELETE FROM "users"[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "status", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Alice"], ["email", "alice@example.com"], ["status", "active"], ["created_at", "2025-12-23 10:45:19.454779"], ["updated_at", "2025-12-23 10:45:19.454779"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "status", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Bob"], ["email", "bob@example.com"], ["status", "inactive"], ["created_at", "2025-12-23 10:45:19.456238"], ["updated_at", "2025-12-23 10:45:19.456238"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPost Create (0.4ms)[0m  [1m[32mINSERT INTO "posts" ("title", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?) RETURNING "id"[0m  [["title", "Alice's Adventures"], ["user_id", 102], ["created_at", "2025-12-23 10:45:19.461280"], ["updated_at", "2025-12-23 10:45:19.461280"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPost Create (0.4ms)[0m  [1m[32mINSERT INTO "posts" ("title", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?) RETURNING "id"[0m  [["title", "Ruby on Rails"], ["user_id", 103], ["created_at", "2025-12-23 10:45:19.462605"], ["updated_at", "2025-12-23 10:45:19.462605"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" INNER JOIN "posts" ON "posts"."user_id" = "users"."id" WHERE (name LIKE '%Adventures%' OR posts.title LIKE '%Adventures%')[0m
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "posts" ON "posts"."user_id" = "users"."id" WHERE (name LIKE '%Adventures%' OR posts.title LIKE '%Adventures%') LIMIT ? OFFSET ?[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPost Delete All (0.1ms)[0m  [1m[31mDELETE FROM "posts"[0m
+  [1m[36mUser Delete All (0.1ms)[0m  [1m[31mDELETE FROM "users"[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (1.7ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "status", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Alice"], ["email", "alice@example.com"], ["status", "active"], ["created_at", "2025-12-23 10:45:19.475597"], ["updated_at", "2025-12-23 10:45:19.475597"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (1.0ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "status", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Bob"], ["email", "bob@example.com"], ["status", "inactive"], ["created_at", "2025-12-23 10:45:19.480844"], ["updated_at", "2025-12-23 10:45:19.480844"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPost Create (1.0ms)[0m  [1m[32mINSERT INTO "posts" ("title", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?) RETURNING "id"[0m  [["title", "Alice's Adventures"], ["user_id", 102], ["created_at", "2025-12-23 10:45:19.483920"], ["updated_at", "2025-12-23 10:45:19.483920"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPost Create (0.9ms)[0m  [1m[32mINSERT INTO "posts" ("title", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?) RETURNING "id"[0m  [["title", "Ruby on Rails"], ["user_id", 103], ["created_at", "2025-12-23 10:45:19.487512"], ["updated_at", "2025-12-23 10:45:19.487512"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Count (1.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" INNER JOIN "posts" ON "posts"."user_id" = "users"."id"[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "posts" ON "posts"."user_id" = "users"."id" ORDER BY "posts"."title" DESC LIMIT ? OFFSET ?[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPost Delete All (0.1ms)[0m  [1m[31mDELETE FROM "posts"[0m
+  [1m[36mUser Delete All (0.1ms)[0m  [1m[31mDELETE FROM "users"[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "status", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Alice"], ["email", "alice@example.com"], ["status", "active"], ["created_at", "2025-12-23 10:45:19.499073"], ["updated_at", "2025-12-23 10:45:19.499073"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (1.6ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "status", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Bob"], ["email", "bob@example.com"], ["status", "inactive"], ["created_at", "2025-12-23 10:45:19.501073"], ["updated_at", "2025-12-23 10:45:19.501073"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPost Create (1.8ms)[0m  [1m[32mINSERT INTO "posts" ("title", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?) RETURNING "id"[0m  [["title", "Alice's Adventures"], ["user_id", 102], ["created_at", "2025-12-23 10:45:19.503593"], ["updated_at", "2025-12-23 10:45:19.503593"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPost Create (8.7ms)[0m  [1m[32mINSERT INTO "posts" ("title", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?) RETURNING "id"[0m  [["title", "Ruby on Rails"], ["user_id", 103], ["created_at", "2025-12-23 10:45:19.507774"], ["updated_at", "2025-12-23 10:45:19.507774"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPost Delete All (0.1ms)[0m  [1m[31mDELETE FROM "posts"[0m
+  [1m[36mUser Delete All (0.1ms)[0m  [1m[31mDELETE FROM "users"[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (1.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "status", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Alice"], ["email", "alice@example.com"], ["status", "active"], ["created_at", "2025-12-23 10:45:19.522592"], ["updated_at", "2025-12-23 10:45:19.522592"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "status", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Bob"], ["email", "bob@example.com"], ["status", "inactive"], ["created_at", "2025-12-23 10:45:19.527294"], ["updated_at", "2025-12-23 10:45:19.527294"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (1.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "status", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Charlie"], ["email", "charlie@example.com"], ["status", "active"], ["created_at", "2025-12-23 10:45:19.528793"], ["updated_at", "2025-12-23 10:45:19.528793"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+  [1m[36mUser Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM (SELECT 1 AS one FROM "users" LIMIT ? OFFSET ?) subquery_for_count[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPost Delete All (0.1ms)[0m  [1m[31mDELETE FROM "posts"[0m
+  [1m[36mUser Delete All (0.0ms)[0m  [1m[31mDELETE FROM "users"[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "status", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Alice"], ["email", "alice@example.com"], ["status", "active"], ["created_at", "2025-12-23 10:45:19.537828"], ["updated_at", "2025-12-23 10:45:19.537828"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "status", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Bob"], ["email", "bob@example.com"], ["status", "inactive"], ["created_at", "2025-12-23 10:45:19.538983"], ["updated_at", "2025-12-23 10:45:19.538983"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.7ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "status", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Charlie"], ["email", "charlie@example.com"], ["status", "active"], ["created_at", "2025-12-23 10:45:19.540192"], ["updated_at", "2025-12-23 10:45:19.540192"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" WHERE (name LIKE '%Alice%')[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE (name LIKE '%Alice%') LIMIT ? OFFSET ?[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (1.2ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPost Delete All (0.1ms)[0m  [1m[31mDELETE FROM "posts"[0m
+  [1m[36mUser Delete All (0.0ms)[0m  [1m[31mDELETE FROM "users"[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (1.1ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "status", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Alice"], ["email", "alice@example.com"], ["status", "active"], ["created_at", "2025-12-23 10:45:19.555973"], ["updated_at", "2025-12-23 10:45:19.555973"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "status", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Bob"], ["email", "bob@example.com"], ["status", "inactive"], ["created_at", "2025-12-23 10:45:19.559116"], ["updated_at", "2025-12-23 10:45:19.559116"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "status", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Charlie"], ["email", "charlie@example.com"], ["status", "active"], ["created_at", "2025-12-23 10:45:19.560424"], ["updated_at", "2025-12-23 10:45:19.560424"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."name" ASC LIMIT ? OFFSET ?[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPost Delete All (0.1ms)[0m  [1m[31mDELETE FROM "posts"[0m
+  [1m[36mUser Delete All (0.2ms)[0m  [1m[31mDELETE FROM "users"[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (1.0ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "status", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Alice"], ["email", "alice@example.com"], ["status", "active"], ["created_at", "2025-12-23 10:45:19.565068"], ["updated_at", "2025-12-23 10:45:19.565068"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "status", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Bob"], ["email", "bob@example.com"], ["status", "inactive"], ["created_at", "2025-12-23 10:45:19.567662"], ["updated_at", "2025-12-23 10:45:19.567662"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "status", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Charlie"], ["email", "charlie@example.com"], ["status", "active"], ["created_at", "2025-12-23 10:45:19.568885"], ["updated_at", "2025-12-23 10:45:19.568885"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."name" DESC LIMIT ? OFFSET ?[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPost Delete All (0.1ms)[0m  [1m[31mDELETE FROM "posts"[0m
+  [1m[36mUser Delete All (0.0ms)[0m  [1m[31mDELETE FROM "users"[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.6ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "status", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Alice"], ["email", "alice@example.com"], ["status", "active"], ["created_at", "2025-12-23 10:45:19.573530"], ["updated_at", "2025-12-23 10:45:19.573530"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "status", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Bob"], ["email", "bob@example.com"], ["status", "inactive"], ["created_at", "2025-12-23 10:45:19.575107"], ["updated_at", "2025-12-23 10:45:19.575107"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "status", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Charlie"], ["email", "charlie@example.com"], ["status", "active"], ["created_at", "2025-12-23 10:45:19.576521"], ["updated_at", "2025-12-23 10:45:19.576521"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."name" ASC LIMIT ? OFFSET ?[0m  [["LIMIT", 2], ["OFFSET", 0]]
+  [1m[36mUser Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."name" ASC LIMIT ? OFFSET ?[0m  [["LIMIT", 2], ["OFFSET", 2]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mUser Count (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+  [1m[36mPost Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "posts"[0m
+Started GET "/examples/simple" for ::1 at 2025-12-23 16:21:21 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ExamplesController#simple as HTML
+Completed 500 Internal Server Error in 4ms (ActiveRecord: 0.0ms | Allocations: 2316)
+
+
+  
+ActionController::UnfilteredParameters (unable to convert unpermitted parameters to hash):
+  
+app/controllers/examples_controller.rb:3:in `new'
+app/controllers/examples_controller.rb:3:in `simple'
+Started GET "/examples/complex" for ::1 at 2025-12-23 16:21:28 +0530
+Processing by ExamplesController#complex as HTML
+Completed 500 Internal Server Error in 12ms (ActiveRecord: 0.0ms | Allocations: 661)
+
+
+  
+ActionController::UnfilteredParameters (unable to convert unpermitted parameters to hash):
+  
+app/controllers/examples_controller.rb:7:in `new'
+app/controllers/examples_controller.rb:7:in `complex'
+Started GET "/examples/dashboard" for ::1 at 2025-12-23 16:21:36 +0530
+Processing by ExamplesController#dashboard as HTML
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms | Allocations: 494)
+
+
+  
+ActionController::UnfilteredParameters (unable to convert unpermitted parameters to hash):
+  
+app/controllers/examples_controller.rb:14:in `new'
+app/controllers/examples_controller.rb:14:in `dashboard'
+Started GET "/examples/simple" for ::1 at 2025-12-23 16:21:43 +0530
+Processing by ExamplesController#simple as HTML
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms | Allocations: 494)
+
+
+  
+ActionController::UnfilteredParameters (unable to convert unpermitted parameters to hash):
+  
+app/controllers/examples_controller.rb:3:in `new'
+app/controllers/examples_controller.rb:3:in `simple'
+Started GET "/examples/complex" for ::1 at 2025-12-23 16:21:56 +0530
+Processing by ExamplesController#complex as HTML
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.0ms | Allocations: 493)
+
+
+  
+ActionController::UnfilteredParameters (unable to convert unpermitted parameters to hash):
+  
+app/controllers/examples_controller.rb:7:in `new'
+app/controllers/examples_controller.rb:7:in `complex'
+Started GET "/examples/dashboard" for ::1 at 2025-12-23 16:22:09 +0530
+Processing by ExamplesController#dashboard as HTML
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms | Allocations: 493)
+
+
+  
+ActionController::UnfilteredParameters (unable to convert unpermitted parameters to hash):
+  
+app/controllers/examples_controller.rb:14:in `new'
+app/controllers/examples_controller.rb:14:in `dashboard'
+Started GET "/examples/simple" for ::1 at 2025-12-23 16:22:48 +0530
+Processing by ExamplesController#simple as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering examples/simple.html.erb within layouts/application
+  [1m[36mUser Count (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+  ↳ app/views/examples/simple.html.erb:7
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" LIMIT ? OFFSET ?[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  ↳ app/views/examples/simple.html.erb:7
+  Rendered examples/simple.html.erb within layouts/application (Duration: 63.3ms | Allocations: 42061)
+  Rendered layout layouts/application.html.erb (Duration: 103.1ms | Allocations: 60940)
+Completed 200 OK in 106ms (Views: 99.5ms | ActiveRecord: 4.7ms | Allocations: 62133)
+
+
+Started GET "/assets/application-381287eca19f4d3ca6a8aa9ed68b8805d918bc26f4597e4f39e30f6259188840.css" for ::1 at 2025-12-23 16:22:48 +0530
+Started GET "/examples/complex" for ::1 at 2025-12-23 16:22:58 +0530
+Processing by ExamplesController#complex as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering examples/complex.html.erb within layouts/application
+  [1m[36mUser Pluck (0.2ms)[0m  [1m[34mSELECT "users"."name", "users"."id" FROM "users"[0m
+  ↳ app/grids/complex_post_grid.rb:6:in `block in <class:ComplexPostGrid>'
+  [1m[36mPost Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "posts"[0m
+  ↳ app/views/examples/complex.html.erb:7
+  [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT "posts".* FROM "posts" LIMIT ? OFFSET ?[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  ↳ app/views/examples/complex.html.erb:7
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IN (?, ?, ?, ?, ?)[0m  [["id", 3], ["id", 5], ["id", 6], ["id", 7], ["id", 8]]
+  ↳ app/views/examples/complex.html.erb:7
+  Rendered examples/complex.html.erb within layouts/application (Duration: 54.9ms | Allocations: 31805)
+  Rendered layout layouts/application.html.erb (Duration: 59.1ms | Allocations: 33933)
+Completed 200 OK in 63ms (Views: 58.6ms | ActiveRecord: 1.1ms | Allocations: 34406)
+
+
+Started GET "/examples/dashboard" for ::1 at 2025-12-23 16:23:11 +0530
+Processing by ExamplesController#dashboard as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering examples/dashboard.html.erb within layouts/application
+  [1m[36mUser Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+  ↳ app/views/examples/dashboard.html.erb:11
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" LIMIT ? OFFSET ?[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  ↳ app/views/examples/dashboard.html.erb:11
+  [1m[36mPost Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "posts"[0m
+  ↳ app/views/examples/dashboard.html.erb:16
+  [1m[36mPost Load (0.0ms)[0m  [1m[34mSELECT "posts".* FROM "posts" LIMIT ? OFFSET ?[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  ↳ app/views/examples/dashboard.html.erb:16
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IN (?, ?, ?, ?, ?)[0m  [["id", 3], ["id", 5], ["id", 6], ["id", 7], ["id", 8]]
+  ↳ app/views/examples/dashboard.html.erb:16
+  [1m[36mUser Pluck (0.1ms)[0m  [1m[34mSELECT "users"."name", "users"."id" FROM "users"[0m
+  ↳ app/grids/complex_post_grid.rb:6:in `block in <class:ComplexPostGrid>'
+  Rendered examples/dashboard.html.erb within layouts/application (Duration: 10.0ms | Allocations: 11115)
+  Rendered layout layouts/application.html.erb (Duration: 12.4ms | Allocations: 12292)
+Completed 200 OK in 14ms (Views: 12.5ms | ActiveRecord: 0.4ms | Allocations: 12634)
+
+
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (1.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "component_test_items"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "component_test_items" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "active" boolean)[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mComponentTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "component_test_items" ("name", "active") VALUES (?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["active", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mComponentTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "component_test_items"[0m
+  [1m[36mComponentTestItem Load (0.0ms)[0m  [1m[34mSELECT "component_test_items".* FROM "component_test_items" LIMIT ? OFFSET ?[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mComponentTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "component_test_items"[0m
+  [1m[36mComponentTestItem Load (0.0ms)[0m  [1m[34mSELECT "component_test_items".* FROM "component_test_items" LIMIT ? OFFSET ?[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "component_test_items"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "test_items"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "test_items" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "category" varchar, "active" boolean, "price" integer, "created_at" date)[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["category", "A"], ["active", 1], ["price", 10], ["created_at", "2023-01-01"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 2"], ["category", "B"], ["active", 0], ["price", 20], ["created_at", "2023-01-02"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 3"], ["category", "A"], ["active", 1], ["price", 30], ["created_at", "2023-01-03"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "test_items"[0m
+  [1m[36mTestItem Load (0.0ms)[0m  [1m[34mSELECT "test_items".* FROM "test_items" LIMIT ? OFFSET ?[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM (SELECT 1 AS one FROM "test_items" LIMIT ? OFFSET ?) subquery_for_count[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["category", "A"], ["active", 1], ["price", 10], ["created_at", "2023-01-01"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.3ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 2"], ["category", "B"], ["active", 0], ["price", 20], ["created_at", "2023-01-02"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.3ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 3"], ["category", "A"], ["active", 1], ["price", 30], ["created_at", "2023-01-03"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "test_items" WHERE "test_items"."category" = ?[0m  [["category", "A"]]
+  [1m[36mTestItem Load (0.0ms)[0m  [1m[34mSELECT "test_items".* FROM "test_items" WHERE "test_items"."category" = ? LIMIT ? OFFSET ?[0m  [["category", "A"], ["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["category", "A"], ["active", 1], ["price", 10], ["created_at", "2023-01-01"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 2"], ["category", "B"], ["active", 0], ["price", 20], ["created_at", "2023-01-02"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 3"], ["category", "A"], ["active", 1], ["price", 30], ["created_at", "2023-01-03"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "test_items" WHERE "test_items"."active" = ?[0m  [["active", 1]]
+  [1m[36mTestItem Load (0.0ms)[0m  [1m[34mSELECT "test_items".* FROM "test_items" WHERE "test_items"."active" = ? LIMIT ? OFFSET ?[0m  [["active", 1], ["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.3ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["category", "A"], ["active", 1], ["price", 10], ["created_at", "2023-01-01"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 2"], ["category", "B"], ["active", 0], ["price", 20], ["created_at", "2023-01-02"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.3ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 3"], ["category", "A"], ["active", 1], ["price", 30], ["created_at", "2023-01-03"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "test_items" WHERE "test_items"."active" = ?[0m  [["active", 0]]
+  [1m[36mTestItem Load (0.0ms)[0m  [1m[34mSELECT "test_items".* FROM "test_items" WHERE "test_items"."active" = ? LIMIT ? OFFSET ?[0m  [["active", 0], ["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["category", "A"], ["active", 1], ["price", 10], ["created_at", "2023-01-01"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 2"], ["category", "B"], ["active", 0], ["price", 20], ["created_at", "2023-01-02"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 3"], ["category", "A"], ["active", 1], ["price", 30], ["created_at", "2023-01-03"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "test_items" WHERE "test_items"."price" BETWEEN ? AND ?[0m  [["price", 15], ["price", 25]]
+  [1m[36mTestItem Load (0.0ms)[0m  [1m[34mSELECT "test_items".* FROM "test_items" WHERE "test_items"."price" BETWEEN ? AND ? LIMIT ? OFFSET ?[0m  [["price", 15], ["price", 25], ["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["category", "A"], ["active", 1], ["price", 10], ["created_at", "2023-01-01"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 2"], ["category", "B"], ["active", 0], ["price", 20], ["created_at", "2023-01-02"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.3ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 3"], ["category", "A"], ["active", 1], ["price", 30], ["created_at", "2023-01-03"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "test_items" WHERE (price >= 25)[0m
+  [1m[36mTestItem Load (0.0ms)[0m  [1m[34mSELECT "test_items".* FROM "test_items" WHERE (price >= 25) LIMIT ? OFFSET ?[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["category", "A"], ["active", 1], ["price", 10], ["created_at", "2023-01-01"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 2"], ["category", "B"], ["active", 0], ["price", 20], ["created_at", "2023-01-02"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 3"], ["category", "A"], ["active", 1], ["price", 30], ["created_at", "2023-01-03"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "test_items" WHERE (price <= 15)[0m
+  [1m[36mTestItem Load (0.0ms)[0m  [1m[34mSELECT "test_items".* FROM "test_items" WHERE (price <= 15) LIMIT ? OFFSET ?[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["category", "A"], ["active", 1], ["price", 10], ["created_at", "2023-01-01"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.3ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 2"], ["category", "B"], ["active", 0], ["price", 20], ["created_at", "2023-01-02"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.3ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 3"], ["category", "A"], ["active", 1], ["price", 30], ["created_at", "2023-01-03"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "test_items" WHERE "test_items"."created_at" BETWEEN ? AND ?[0m  [["created_at", "2023-01-02"], ["created_at", "2023-01-03"]]
+  [1m[36mTestItem Load (0.0ms)[0m  [1m[34mSELECT "test_items".* FROM "test_items" WHERE "test_items"."created_at" BETWEEN ? AND ? LIMIT ? OFFSET ?[0m  [["created_at", "2023-01-02"], ["created_at", "2023-01-03"], ["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["category", "A"], ["active", 1], ["price", 10], ["created_at", "2023-01-01"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 2"], ["category", "B"], ["active", 0], ["price", 20], ["created_at", "2023-01-02"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.3ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 3"], ["category", "A"], ["active", 1], ["price", 30], ["created_at", "2023-01-03"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "test_items"[0m
+  [1m[36mTestItem Load (0.0ms)[0m  [1m[34mSELECT "test_items".* FROM "test_items" LIMIT ? OFFSET ?[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "test_items"[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPost Delete All (0.1ms)[0m  [1m[31mDELETE FROM "posts"[0m
+  [1m[36mUser Delete All (0.0ms)[0m  [1m[31mDELETE FROM "users"[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "status", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Alice"], ["email", "alice@example.com"], ["status", "active"], ["created_at", "2025-12-23 10:53:57.170641"], ["updated_at", "2025-12-23 10:53:57.170641"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "status", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Bob"], ["email", "bob@example.com"], ["status", "inactive"], ["created_at", "2025-12-23 10:53:57.171822"], ["updated_at", "2025-12-23 10:53:57.171822"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPost Create (0.3ms)[0m  [1m[32mINSERT INTO "posts" ("title", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?) RETURNING "id"[0m  [["title", "Alice's Adventures"], ["user_id", 102], ["created_at", "2025-12-23 10:53:57.175920"], ["updated_at", "2025-12-23 10:53:57.175920"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPost Create (0.3ms)[0m  [1m[32mINSERT INTO "posts" ("title", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?) RETURNING "id"[0m  [["title", "Ruby on Rails"], ["user_id", 103], ["created_at", "2025-12-23 10:53:57.176959"], ["updated_at", "2025-12-23 10:53:57.176959"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" INNER JOIN "posts" ON "posts"."user_id" = "users"."id" WHERE (name LIKE '%Adventures%' OR posts.title LIKE '%Adventures%')[0m
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "posts" ON "posts"."user_id" = "users"."id" WHERE (name LIKE '%Adventures%' OR posts.title LIKE '%Adventures%') LIMIT ? OFFSET ?[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPost Delete All (0.1ms)[0m  [1m[31mDELETE FROM "posts"[0m
+  [1m[36mUser Delete All (0.0ms)[0m  [1m[31mDELETE FROM "users"[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "status", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Alice"], ["email", "alice@example.com"], ["status", "active"], ["created_at", "2025-12-23 10:53:57.182960"], ["updated_at", "2025-12-23 10:53:57.182960"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "status", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Bob"], ["email", "bob@example.com"], ["status", "inactive"], ["created_at", "2025-12-23 10:53:57.186362"], ["updated_at", "2025-12-23 10:53:57.186362"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPost Create (0.3ms)[0m  [1m[32mINSERT INTO "posts" ("title", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?) RETURNING "id"[0m  [["title", "Alice's Adventures"], ["user_id", 102], ["created_at", "2025-12-23 10:53:57.187412"], ["updated_at", "2025-12-23 10:53:57.187412"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPost Create (0.3ms)[0m  [1m[32mINSERT INTO "posts" ("title", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?) RETURNING "id"[0m  [["title", "Ruby on Rails"], ["user_id", 103], ["created_at", "2025-12-23 10:53:57.188387"], ["updated_at", "2025-12-23 10:53:57.188387"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" INNER JOIN "posts" ON "posts"."user_id" = "users"."id"[0m
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "posts" ON "posts"."user_id" = "users"."id" ORDER BY "posts"."title" DESC LIMIT ? OFFSET ?[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPost Delete All (0.1ms)[0m  [1m[31mDELETE FROM "posts"[0m
+  [1m[36mUser Delete All (0.0ms)[0m  [1m[31mDELETE FROM "users"[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "status", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Alice"], ["email", "alice@example.com"], ["status", "active"], ["created_at", "2025-12-23 10:53:57.191347"], ["updated_at", "2025-12-23 10:53:57.191347"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "status", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Bob"], ["email", "bob@example.com"], ["status", "inactive"], ["created_at", "2025-12-23 10:53:57.192407"], ["updated_at", "2025-12-23 10:53:57.192407"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPost Create (0.3ms)[0m  [1m[32mINSERT INTO "posts" ("title", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?) RETURNING "id"[0m  [["title", "Alice's Adventures"], ["user_id", 102], ["created_at", "2025-12-23 10:53:57.193443"], ["updated_at", "2025-12-23 10:53:57.193443"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPost Create (0.3ms)[0m  [1m[32mINSERT INTO "posts" ("title", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?) RETURNING "id"[0m  [["title", "Ruby on Rails"], ["user_id", 103], ["created_at", "2025-12-23 10:53:57.194458"], ["updated_at", "2025-12-23 10:53:57.194458"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPost Delete All (0.1ms)[0m  [1m[31mDELETE FROM "posts"[0m
+  [1m[36mUser Delete All (0.0ms)[0m  [1m[31mDELETE FROM "users"[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "status", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Alice"], ["email", "alice@example.com"], ["status", "active"], ["created_at", "2025-12-23 10:53:57.196922"], ["updated_at", "2025-12-23 10:53:57.196922"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "status", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Bob"], ["email", "bob@example.com"], ["status", "inactive"], ["created_at", "2025-12-23 10:53:57.197973"], ["updated_at", "2025-12-23 10:53:57.197973"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "status", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Charlie"], ["email", "charlie@example.com"], ["status", "active"], ["created_at", "2025-12-23 10:53:57.199015"], ["updated_at", "2025-12-23 10:53:57.199015"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+  [1m[36mUser Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM (SELECT 1 AS one FROM "users" LIMIT ? OFFSET ?) subquery_for_count[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPost Delete All (0.1ms)[0m  [1m[31mDELETE FROM "posts"[0m
+  [1m[36mUser Delete All (0.0ms)[0m  [1m[31mDELETE FROM "users"[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "status", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Alice"], ["email", "alice@example.com"], ["status", "active"], ["created_at", "2025-12-23 10:53:57.201563"], ["updated_at", "2025-12-23 10:53:57.201563"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "status", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Bob"], ["email", "bob@example.com"], ["status", "inactive"], ["created_at", "2025-12-23 10:53:57.202581"], ["updated_at", "2025-12-23 10:53:57.202581"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "status", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Charlie"], ["email", "charlie@example.com"], ["status", "active"], ["created_at", "2025-12-23 10:53:57.203558"], ["updated_at", "2025-12-23 10:53:57.203558"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" WHERE (name LIKE '%Alice%')[0m
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE (name LIKE '%Alice%') LIMIT ? OFFSET ?[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPost Delete All (0.1ms)[0m  [1m[31mDELETE FROM "posts"[0m
+  [1m[36mUser Delete All (0.0ms)[0m  [1m[31mDELETE FROM "users"[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "status", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Alice"], ["email", "alice@example.com"], ["status", "active"], ["created_at", "2025-12-23 10:53:57.206202"], ["updated_at", "2025-12-23 10:53:57.206202"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "status", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Bob"], ["email", "bob@example.com"], ["status", "inactive"], ["created_at", "2025-12-23 10:53:57.207191"], ["updated_at", "2025-12-23 10:53:57.207191"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "status", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Charlie"], ["email", "charlie@example.com"], ["status", "active"], ["created_at", "2025-12-23 10:53:57.208187"], ["updated_at", "2025-12-23 10:53:57.208187"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."name" ASC LIMIT ? OFFSET ?[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPost Delete All (0.1ms)[0m  [1m[31mDELETE FROM "posts"[0m
+  [1m[36mUser Delete All (0.0ms)[0m  [1m[31mDELETE FROM "users"[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "status", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Alice"], ["email", "alice@example.com"], ["status", "active"], ["created_at", "2025-12-23 10:53:57.210852"], ["updated_at", "2025-12-23 10:53:57.210852"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "status", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Bob"], ["email", "bob@example.com"], ["status", "inactive"], ["created_at", "2025-12-23 10:53:57.211909"], ["updated_at", "2025-12-23 10:53:57.211909"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "status", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Charlie"], ["email", "charlie@example.com"], ["status", "active"], ["created_at", "2025-12-23 10:53:57.212940"], ["updated_at", "2025-12-23 10:53:57.212940"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."name" DESC LIMIT ? OFFSET ?[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPost Delete All (0.1ms)[0m  [1m[31mDELETE FROM "posts"[0m
+  [1m[36mUser Delete All (0.0ms)[0m  [1m[31mDELETE FROM "users"[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "status", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Alice"], ["email", "alice@example.com"], ["status", "active"], ["created_at", "2025-12-23 10:53:57.215549"], ["updated_at", "2025-12-23 10:53:57.215549"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "status", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Bob"], ["email", "bob@example.com"], ["status", "inactive"], ["created_at", "2025-12-23 10:53:57.216553"], ["updated_at", "2025-12-23 10:53:57.216553"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "status", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Charlie"], ["email", "charlie@example.com"], ["status", "active"], ["created_at", "2025-12-23 10:53:57.217552"], ["updated_at", "2025-12-23 10:53:57.217552"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."name" ASC LIMIT ? OFFSET ?[0m  [["LIMIT", 2], ["OFFSET", 0]]
+  [1m[36mUser Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."name" ASC LIMIT ? OFFSET ?[0m  [["LIMIT", 2], ["OFFSET", 2]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.8ms)[0m  [1m[35mDROP TABLE IF EXISTS "test_items"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "test_items" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "category" varchar, "active" boolean, "price" integer, "created_at" date)[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (1.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["category", "A"], ["active", 1], ["price", 10], ["created_at", "2023-01-01"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (1.3ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 2"], ["category", "B"], ["active", 0], ["price", 20], ["created_at", "2023-01-02"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (1.3ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 3"], ["category", "A"], ["active", 1], ["price", 30], ["created_at", "2023-01-03"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (1.1ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["category", "A"], ["active", 1], ["price", 10], ["created_at", "2023-01-01"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.8ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 2"], ["category", "B"], ["active", 0], ["price", 20], ["created_at", "2023-01-02"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 3"], ["category", "A"], ["active", 1], ["price", 30], ["created_at", "2023-01-03"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "test_items"[0m
+  [1m[36mTestItem Load (0.0ms)[0m  [1m[34mSELECT "test_items".* FROM "test_items" LIMIT ? OFFSET ?[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM (SELECT 1 AS one FROM "test_items" LIMIT ? OFFSET ?) subquery_for_count[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["category", "A"], ["active", 1], ["price", 10], ["created_at", "2023-01-01"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 2"], ["category", "B"], ["active", 0], ["price", 20], ["created_at", "2023-01-02"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.6ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 3"], ["category", "A"], ["active", 1], ["price", 30], ["created_at", "2023-01-03"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "test_items" WHERE "test_items"."category" = ?[0m  [["category", "A"]]
+  [1m[36mTestItem Load (0.0ms)[0m  [1m[34mSELECT "test_items".* FROM "test_items" WHERE "test_items"."category" = ? LIMIT ? OFFSET ?[0m  [["category", "A"], ["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["category", "A"], ["active", 1], ["price", 10], ["created_at", "2023-01-01"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 2"], ["category", "B"], ["active", 0], ["price", 20], ["created_at", "2023-01-02"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 3"], ["category", "A"], ["active", 1], ["price", 30], ["created_at", "2023-01-03"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "test_items" WHERE "test_items"."active" = ?[0m  [["active", 1]]
+  [1m[36mTestItem Load (0.0ms)[0m  [1m[34mSELECT "test_items".* FROM "test_items" WHERE "test_items"."active" = ? LIMIT ? OFFSET ?[0m  [["active", 1], ["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["category", "A"], ["active", 1], ["price", 10], ["created_at", "2023-01-01"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 2"], ["category", "B"], ["active", 0], ["price", 20], ["created_at", "2023-01-02"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 3"], ["category", "A"], ["active", 1], ["price", 30], ["created_at", "2023-01-03"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "test_items" WHERE "test_items"."active" = ?[0m  [["active", 0]]
+  [1m[36mTestItem Load (0.0ms)[0m  [1m[34mSELECT "test_items".* FROM "test_items" WHERE "test_items"."active" = ? LIMIT ? OFFSET ?[0m  [["active", 0], ["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.3ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["category", "A"], ["active", 1], ["price", 10], ["created_at", "2023-01-01"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.3ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 2"], ["category", "B"], ["active", 0], ["price", 20], ["created_at", "2023-01-02"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 3"], ["category", "A"], ["active", 1], ["price", 30], ["created_at", "2023-01-03"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "test_items" WHERE "test_items"."price" BETWEEN ? AND ?[0m  [["price", 15], ["price", 25]]
+  [1m[36mTestItem Load (0.0ms)[0m  [1m[34mSELECT "test_items".* FROM "test_items" WHERE "test_items"."price" BETWEEN ? AND ? LIMIT ? OFFSET ?[0m  [["price", 15], ["price", 25], ["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["category", "A"], ["active", 1], ["price", 10], ["created_at", "2023-01-01"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 2"], ["category", "B"], ["active", 0], ["price", 20], ["created_at", "2023-01-02"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 3"], ["category", "A"], ["active", 1], ["price", 30], ["created_at", "2023-01-03"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "test_items" WHERE (price >= 25)[0m
+  [1m[36mTestItem Load (0.0ms)[0m  [1m[34mSELECT "test_items".* FROM "test_items" WHERE (price >= 25) LIMIT ? OFFSET ?[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["category", "A"], ["active", 1], ["price", 10], ["created_at", "2023-01-01"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 2"], ["category", "B"], ["active", 0], ["price", 20], ["created_at", "2023-01-02"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 3"], ["category", "A"], ["active", 1], ["price", 30], ["created_at", "2023-01-03"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "test_items" WHERE (price <= 15)[0m
+  [1m[36mTestItem Load (0.0ms)[0m  [1m[34mSELECT "test_items".* FROM "test_items" WHERE (price <= 15) LIMIT ? OFFSET ?[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["category", "A"], ["active", 1], ["price", 10], ["created_at", "2023-01-01"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 2"], ["category", "B"], ["active", 0], ["price", 20], ["created_at", "2023-01-02"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.3ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 3"], ["category", "A"], ["active", 1], ["price", 30], ["created_at", "2023-01-03"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "test_items" WHERE "test_items"."created_at" BETWEEN ? AND ?[0m  [["created_at", "2023-01-02"], ["created_at", "2023-01-03"]]
+  [1m[36mTestItem Load (0.0ms)[0m  [1m[34mSELECT "test_items".* FROM "test_items" WHERE "test_items"."created_at" BETWEEN ? AND ? LIMIT ? OFFSET ?[0m  [["created_at", "2023-01-02"], ["created_at", "2023-01-03"], ["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 1"], ["category", "A"], ["active", 1], ["price", 10], ["created_at", "2023-01-01"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 2"], ["category", "B"], ["active", 0], ["price", 20], ["created_at", "2023-01-02"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTestItem Create (0.4ms)[0m  [1m[32mINSERT INTO "test_items" ("name", "category", "active", "price", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Item 3"], ["category", "A"], ["active", 1], ["price", 30], ["created_at", "2023-01-03"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTestItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "test_items"[0m
+  [1m[36mTestItem Load (0.0ms)[0m  [1m[34mSELECT "test_items".* FROM "test_items" LIMIT ? OFFSET ?[0m  [["LIMIT", 10], ["OFFSET", 0]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "test_items"[0m

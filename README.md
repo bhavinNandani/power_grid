@@ -17,6 +17,10 @@ Built with **ViewComponent**, **Turbo Frames**, **Stimulus**, and **TailwindCSS*
   - Multi-column search support.
   - Search on **joined tables** via `sql_expression`.
   - Automatic input debouncing.
+- 🎛 **Advanced Filtering**:
+  - Support for **Search**, **Select**, **Checkboxes**, and **Radio Buttons**.
+  - Dynamic collections using Lambdas (e.g., `-> { User.all }`).
+  - Custom filtering logic via blocks.
 - 📄 **Smart Pagination**:
   - Numbered pagination window (e.g., `1 2 ... 5 6 7 ... 10`).
   - Dynamic **Per Page** limits.
@@ -24,6 +28,9 @@ Built with **ViewComponent**, **Turbo Frames**, **Stimulus**, and **TailwindCSS*
 - 🎨 **Visuals**:
   - Professional "Slate" color palette.
   - Fully responsive and Dark Mode compatible.
+  - **Customizable CSS** classes.
+- 🛠 **Modular Toolbar**:
+  - Render the toolbar (search/filters) separately from the table for flexible layouts.
 - 🚀 **Optimization**: Built-in support for `includes` to automatically prevent N+1 queries.
 
 ## Installation
@@ -44,7 +51,7 @@ $ bundle install
 
 ### 1. Define your Grid
 
-Create a class that inherits from `PowerGrid::Base`. This class defines your data source and columns.
+Create a class that inherits from `PowerGrid::Base`. This class defines your data source, columns, and filters.
 
 ```ruby
 # app/grids/users_grid.rb
@@ -58,6 +65,14 @@ class UsersGrid < PowerGrid::Base
   # Column with block formatting (for badges, links, etc.)
   column :status do |user|
     tag.span(user.status.humanize, class: "badge badge-#{user.status}")
+  end
+
+  # Filters
+  filter :role, collection: ["Admin", "User"], include_blank: "All Roles"
+  
+  # Advanced Filter (Checkbox with custom logic)
+  filter :department_ids, type: :checkbox, collection: -> { Department.pluck(:name, :id) } do |scope, value|
+    scope.where(department_id: value)
   end
 end
 ```
@@ -84,7 +99,73 @@ Render the `PowerGrid::TableComponent`, passing the grid instance.
 <%= render PowerGrid::TableComponent.new(@grid) %>
 ```
 
-## detailed API Reference
+## Advanced Filtering
+
+PowerGrid supports rich filtering options beyond simple text search.
+
+### Checkboxes (Multi-select)
+Use `type: :checkbox` to render a list of checkboxes.
+
+```ruby
+filter :category_ids, header: "Categories", type: :checkbox, collection: -> { Category.pluck(:name, :id) }
+```
+
+### Radio Buttons (Single-select)
+Use `type: :radio` to render radio buttons.
+
+```ruby
+filter :active, type: :radio, collection: [["Yes", true], ["No", false]]
+```
+
+### Dynamic Collections
+Pass a `lambda` or `Proc` to `collection:` to load options dynamically at request time.
+
+```ruby
+filter :manager_id, collection: -> { User.where(role: 'manager').pluck(:name, :id) }
+```
+
+### Custom Filtering Logic
+Pass a block to `filter` to customize how the query is modified.
+
+```ruby
+filter :query_date, type: :text do |scope, value|
+  # Parse date string and filter range
+  date = Date.parse(value) rescue nil
+  date ? scope.where(created_at: date.all_day) : scope
+end
+```
+
+## CSS Customization
+
+PowerGrid uses TailwindCSS by default but allows you to override classes for deep customization. Pass a `css:` hash to the component.
+
+```erb
+<%= render PowerGrid::TableComponent.new(@grid, css: {
+  table: "min-w-full divide-y divide-gray-200 border border-gray-300",
+  th: "px-6 py-3 bg-blue-50 text-left text-xs font-medium text-blue-500 uppercase tracking-wider",
+  tr: "bg-white hover:bg-blue-50 transition-colors duration-150"
+}) %>
+```
+
+Available keys in `DEFAULT_CSS`: `container`, `table`, `thead`, `tbody`, `tr`, `th`, `td`, `pagination`, `page_link`, `page_link_active`, `page_prev`, `page_next`, `page_gap`, `search_input`, `filter_select`, `filter_input`.
+
+## Modular Toolbar
+
+You can render the toolbar (Search, Filters, Per Page) separately from the table. This is useful for placing filters in a sidebar or sticky header.
+
+1. Disable the built-in toolbar in `TableComponent`:
+   ```erb
+   <%= render PowerGrid::TableComponent.new(@grid, toolbar: false) %>
+   ```
+
+2. Render `ToolbarComponent` where you want it:
+   ```erb
+   <div class="sticky top-0 bg-white z-10 shadow p-4">
+     <%= render PowerGrid::ToolbarComponent.new(@grid) %>
+   </div>
+   ```
+
+## Detailed API Reference
 
 ### `column(name, options = {}, &block)`
 
@@ -94,25 +175,8 @@ Defines a column in the table.
 | :--- | :--- | :--- |
 | `sortable` | `boolean` | If true, the column header will be clickable to sort. |
 | `searchable` | `boolean` | If true, the global search input will check this column using `LIKE`. |
-| `sql_expression` | `string` | The raw SQL column name to use for sorting/searching. Essential for joined tables (e.g., `"posts.title"`). |
+| `sql_expression` | `string` | The raw SQL column name/expression to use for sorting/searching. Essential for joined tables (e.g., `"posts.title"`). |
 | `includes` | `symbol/array` | Association(s) to eager load when rendering this column to prevent N+1 queries. |
-
-**Example: Joined Column**
-```ruby
-column :"posts.title", 
-       searchable: true, 
-       sortable: true, 
-       sql_expression: "posts.title",
-       includes: :posts
-```
-
-### `scope { ... }`
-
-Defines the default Active Record scope. This is used if no `initial_scope` is passed to the initializer.
-
-```ruby
-scope { User.active.order(created_at: :desc) }
-```
 
 ### `initialize(params, initial_scope: nil)`
 
@@ -123,17 +187,12 @@ scope { User.active.order(created_at: :desc) }
 
 ### TailwindCSS
 
-PowerGrid creates HTML with standard Tailwind utility classes (using the `slate` color palette). Ensure your Tailwind configuration scans your gem paths or includes utilities for:
-- Colors: `slate-50` to `slate-900`.
-- Spacing, Borders, Flexbox, Typography.
+PowerGrid creates HTML with standard Tailwind utility classes (using the `slate` color palette). Ensure your Tailwind configuration scans your gem paths.
 
 ### Hotwire & Stimulus
 
 Ensure your application has `turbo-rails` and `stimulus-rails` installed.
 The gem includes a Stimulus controller `power_grid--table_controller` which handles search input debouncing and auto-submission.
-
-If using **Importmap** (default in Rails 7+), this is configured automatically.
-If using **esbuild/webpack**, manually register the controller if needed, or ensure the gem's assets are in your load path.
 
 ## Contributing
 

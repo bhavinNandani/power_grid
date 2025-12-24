@@ -1,77 +1,22 @@
-<div class="power-grid-container w-full bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800" data-controller="power-grid-table">
+<div class="<%= css_class(:container) %>" data-controller="power-grid-table">
   
   <!-- Clean Toolbar -->
-  <% unless @grid.try(:hide_controls) %>
-  <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 p-4 border-b border-slate-200 dark:border-slate-800">
-    
-    <!-- Search -->
-    <div class="w-full md:w-72">
-      <% if @grid.searchable? %>
-        <div class="relative">
-          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <svg class="h-5 w-5 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
-          </div>
-          <%= text_field_tag :q, params[:q], placeholder: "Search...", 
-              class: "block w-full pl-12 pr-3 py-2 border border-slate-300 dark:border-slate-700 rounded-lg leading-5 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm", 
-              data: { action: "input->power-grid-table#search" },
-              form: "power_grid_form_#{request.path.parameterize}" 
-          %>
-        </div>
-      <% end %>
-    </div>
-
-    <!-- Filters & Actions -->
-    <div class="flex items-center gap-3">
-      <%= form_with url: request.path, method: :get, data: { turbo_frame: "power_grid_table", turbo_action: "advance", power_grid_table_target: "form" }, class: "flex items-center gap-3", id: "power_grid_form_#{request.path.parameterize}" do |f| %>
-        <% params.except(:per_page, :page, :q, *(@grid.class.defined_filters.keys)).each do |key, value| %>
-           <%= hidden_field_tag key, value %>
-        <% end %>
-
-         <!-- Filters -->
-         <% @grid.class.defined_filters.each do |name, options| %>
-            <div class="relative">
-               <% if options[:collection] %>
-                 <%= select_tag name, options_for_select(options[:collection], params[name]), 
-                     include_blank: "All #{name.to_s.humanize.pluralize}",
-                     class: "block w-full pl-3 pr-10 py-2 text-base border-slate-300 dark:border-slate-700 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-lg bg-white dark:bg-slate-800",
-                     onchange: "this.form.requestSubmit()"
-                 %>
-               <% else %>
-                 <%= text_field_tag name, params[name], placeholder: name.to_s.humanize,
-                     class: "block w-full pl-3 pr-3 py-2 border border-slate-300 dark:border-slate-700 rounded-lg leading-5 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm",
-                     data: { action: "input->power-grid-table#search" }
-                 %>
-               <% end %>
-            </div>
-         <% end %>
-         
-        <!-- Per Page -->
-        <div>
-           <%= select_tag :per_page, options_for_select([10, 25, 50, 100], @grid.per_page), 
-               class: "block w-full pl-3 pr-10 py-2 text-base border-slate-300 dark:border-slate-700 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-lg bg-white dark:bg-slate-800",
-               onchange: "this.form.requestSubmit()"
-           %>
-        </div>
-
-      <% end %>
-    </div>
-  </div>
+  <% if show_toolbar? %>
+    <%= render PowerGrid::ToolbarComponent.new(@grid, css: @css, headless: @headless) %>
   <% end %>
 
   <%= turbo_frame_tag "power_grid_table", class: "w-full block" do %>
     <div class="overflow-x-auto">
-      <table class="min-w-full divide-y divide-slate-200 dark:divide-slate-700">
-        <thead class="bg-slate-50 dark:bg-slate-800">
+      <table class="<%= css_class(:table) %>">
+        <thead class="<%= css_class(:thead) %>">
           <tr>
             <% columns.each_with_index do |(key, options), idx| %>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+              <th scope="col" class="<%= css_class(:th) %>">
                 <% label = options[:header] || key.to_s.humanize %>
                 <% if options[:sortable] %>
-                  <%= link_to request.params.merge(order: key, dir: (params[:order] == key.to_s && params[:dir] == "asc" ? "desc" : "asc")), class: "group inline-flex items-center space-x-1 hover:text-slate-700 dark:hover:text-slate-200", data: { turbo_action: "advance" } do %>
+                  <%= link_to request.params.merge(order: key, dir: (params[:order] == key.to_s && params[:dir] == "asc" ? "desc" : "asc")), class: "group inline-flex items-center space-x-1 hover:text-gray-700 dark:hover:text-gray-200", data: { turbo_action: "advance" } do %>
                     <span><%= label %></span>
-                    <span class="flex-none rounded text-slate-400 group-hover:text-slate-600 dark:group-hover:text-slate-300">
+                    <span class="flex-none rounded text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300">
                       <% if params[:order] == key.to_s %>
                          <% if params[:dir] == "asc" %>
                            <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M14.77 12.79a.75.75 0 01-1.06-.02L10 8.832 6.29 12.77a.75.75 0 11-1.08-1.04l4.25-4.5a.75.75 0 011.08 0l4.25 4.5a.75.75 0 01-.02 1.06z" clip-rule="evenodd" /></svg>
@@ -90,11 +35,11 @@
             <% end %>
           </tr>
         </thead>
-        <tbody class="divide-y divide-slate-200 dark:divide-slate-700 bg-white dark:bg-slate-900">
+        <tbody class="<%= css_class(:tbody) %>">
           <% records.each_with_index do |record, index| %>
-            <tr class="hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+            <tr class="<%= css_class(:tr) %>">
               <% columns.each do |key, options| %>
-                <td class="px-6 py-5 whitespace-nowrap text-sm text-slate-700 dark:text-slate-300 font-medium <%= options[:class] %>">
+                <td class="<%= css_class(:td) %> <%= options[:class] %>">
                   <% if options[:block] %>
                     <%= options[:block].call(record) %>
                   <% else %>
@@ -106,15 +51,15 @@
           <% end %>
           <% if records.empty? %>
             <tr>
-               <td colspan="<%= columns.size %>" class="px-6 py-12 text-center text-sm text-slate-500 dark:text-slate-400">
+               <td colspan="<%= columns.size %>" class="px-6 py-12 text-center text-sm text-gray-500 dark:text-gray-400">
                  <div class="flex flex-col items-center justify-center space-y-3">
-                   <div style="height: 48px; width: 48px;" class="mx-auto text-slate-300">
+                   <div style="height: 48px; width: 48px;" class="mx-auto text-gray-300">
                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="48" height="48" style="min-width: 48px; min-height: 48px;">
                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                      </svg>
                    </div>
-                   <p class="text-base font-medium text-slate-900 dark:text-white">No records found</p>
-                   <p class="text-slate-400">Try adjusting your search or filters</p>
+                   <p class="text-base font-medium text-gray-900 dark:text-white">No records found</p>
+                   <p class="text-gray-400">Try adjusting your search or filters</p>
                  </div>
                </td>
             </tr>
@@ -125,9 +70,9 @@
 
     <!-- Clean Pagination Footer -->
     <% if @grid.total_pages > 1 %>
-      <div class="flex items-center justify-between px-6 py-4 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 rounded-b-xl">
+      <div class="<%= css_class(:pagination) %>">
          <!-- Mobile Pagination help text -->
-         <div class="text-sm text-slate-700 dark:text-slate-400 hidden sm:block">
+         <div class="text-sm text-gray-700 dark:text-gray-400 hidden sm:block">
             Showing <span class="font-medium"><%= @grid.current_page %></span> of <span class="font-medium"><%= @grid.total_pages %></span> pages
          </div>
          
@@ -136,7 +81,7 @@
             <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
               <!-- Prev -->
               <%= link_to (@grid.current_page > 1 ? request.params.merge(page: @grid.current_page - 1) : "#"), 
-                  class: "relative inline-flex items-center px-2 py-2 rounded-l-md border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm font-medium #{@grid.current_page > 1 ? 'text-slate-500 hover:bg-slate-50 dark:text-slate-400 dark:hover:bg-slate-700' : 'text-slate-300 cursor-not-allowed'}",
+                  class: css_class(@grid.current_page > 1 ? :page_prev : :page_prev_disabled),
                   disabled: @grid.current_page <= 1,
                   data: { turbo_action: "advance" } do %>
                 <span class="sr-only">Previous</span>
@@ -147,17 +92,17 @@
               
               <% @grid.pagination_window.each do |page| %>
                 <% if page == :gap %>
-                  <span class="relative inline-flex items-center px-4 py-2 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm font-medium text-slate-700 dark:text-slate-300">...</span>
+                  <span class="<%= css_class(:page_gap) %>">...</span>
                 <% elsif page == @grid.current_page %>
-                  <span class="z-10 bg-indigo-50 dark:bg-indigo-900 border-indigo-500 text-indigo-600 dark:text-indigo-200 relative inline-flex items-center px-4 py-2 border text-sm font-medium"><%= page %></span>
+                  <span class="<%= css_class(:page_link_active) %>"><%= page %></span>
                 <% else %>
-                  <%= link_to page, request.params.merge(page: page), class: "bg-white dark:bg-slate-800 border-slate-300 dark:border-slate-700 text-slate-500 hover:bg-slate-50 dark:text-slate-400 dark:hover:bg-slate-700 relative inline-flex items-center px-4 py-2 border text-sm font-medium", data: { turbo_action: "advance" } %>
+                  <%= link_to page, request.params.merge(page: page), class: css_class(:page_link), data: { turbo_action: "advance" } %>
                 <% end %>
               <% end %>
 
               <!-- Next -->
               <%= link_to (@grid.current_page < @grid.total_pages ? request.params.merge(page: @grid.current_page + 1) : "#"), 
-                  class: "relative inline-flex items-center px-2 py-2 rounded-r-md border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm font-medium #{@grid.current_page < @grid.total_pages ? 'text-slate-500 hover:bg-slate-50 dark:text-slate-400 dark:hover:bg-slate-700' : 'text-slate-300 cursor-not-allowed'}",
+                  class: css_class(@grid.current_page < @grid.total_pages ? :page_next : :page_next_disabled),
                   disabled: @grid.current_page >= @grid.total_pages,
                   data: { turbo_action: "advance" } do %>
                 <span class="sr-only">Next</span>

@@ -4,7 +4,7 @@ Gem::Specification.new do |spec|
   spec.name          = "power_grid"
   spec.version       = PowerGrid::VERSION
   spec.authors       = ["Bhavin Nandani"]
-  spec.email         = ["bhavin.nandani@gmail.com"]
+  spec.email         = ["nandanibhavin@gmail.com"]
 
   spec.summary       = "A powerful, server-side processed table component for Rails."
   spec.description   = "PowerGrid provides a view component based table with server-side sorting, filtering, and pagination."

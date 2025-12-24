@@ -1,37 +1,45 @@
 require "rails_helper"
 
 RSpec.describe PowerGrid::TableComponent, type: :component do
-  class UsersTable < PowerGrid::Base
-    scope { User.all }
-    column :name, sortable: true
-    column :email
+  before(:all) do
+    ActiveRecord::Base.connection.create_table :component_test_items, force: true do |t|
+      t.string :name
+      t.boolean :active
+    end
+    class ComponentTestItem < ActiveRecord::Base; end
   end
 
-  before do
-    Post.delete_all
-    User.delete_all
-    User.create!(name: "Alice", email: "alice@example.com")
-    User.create!(name: "Bob", email: "bob@example.com")
+  after(:all) do
+    ActiveRecord::Base.connection.drop_table :component_test_items
+  end
+
+  class TableTestGrid < PowerGrid::Base
+    scope { ComponentTestItem.all }
+    column :name
+    column :active
+    filter :name, type: :string
+    filter :active, type: :boolean
   end
 
   it "renders the table with records" do
-    with_request_url "/users" do
-      render_inline(described_class.new(UsersTable, params: {}))
-    end
+    ComponentTestItem.create!(name: "Item 1", active: true)
+    
+    grid = TableTestGrid.new
+    render_inline(described_class.new(grid))
 
-    expect(page).to have_content("Alice")
-    expect(page).to have_content("Bob")
-    expect(page).to have_content("Name")
-    expect(page).to have_css("table.min-w-full") # Tailwind class
-    expect(page).to have_select("per_page")
-    expect(page).to have_content("Showing")
-    expect(page).to have_content("entries")
+    expect(page).to have_text("Item 1")
+
+    expect(page).to have_selector("table")
+    expect(page).to have_selector("input[name='name']")
   end
 
-  it "renders search input" do
-    with_request_url "/users" do
-      render_inline(described_class.new(UsersTable, params: {}))
-    end
-    expect(page).to have_field("q")
+  it "renders in headless mode (no default classes)" do
+    grid = TableTestGrid.new
+    render_inline(described_class.new(grid, headless: true))
+
+    # Basic check: assert it doesn't have a known default class from DEFAULT_CSS
+    # e.g. DEFAULT_CSS[:container] is "power-grid-container"
+    expect(page).not_to have_css(".power-grid-container")
+    expect(page).to have_selector("table")
   end
 end

@@ -1,4 +1,5 @@
 module PowerGrid
+  require_relative "exporter"
   class Base
     class << self
       def scope(&block)
@@ -10,9 +11,9 @@ module PowerGrid
         @columns[name] = options.merge(block: block)
       end
 
-      def filter(name, **options)
+      def filter(name, **options, &block)
         @filters ||= {}
-        @filters[name] = options
+        @filters[name] = options.merge(block: block)
       end
 
       def defined_scope
@@ -32,25 +33,36 @@ module PowerGrid
     attr_accessor :hide_controls
 
     def initialize(params = {}, initial_scope: nil, **options)
+      params ||= {}
       params = params.to_unsafe_h if params.respond_to?(:to_unsafe_h)
+      params = params.with_indifferent_access
+      
+      # Handle namespaced params (common pattern for custom forms: grid[field])
+      if params[:grid].present? && params[:grid].is_a?(Hash)
+         params = params.merge(params[:grid])
+      end
+
       @params = params.merge(options)
       @initial_scope = initial_scope
       @hide_controls = false # Initialize to false by default
     end
 
     def records
-      @records ||= begin
-        scope = @initial_scope || instance_eval(&self.class.defined_scope)
-        scope = apply_includes(scope)
-        scope = apply_filters(scope)
-        scope = apply_search(scope)
-        scope = apply_sort(scope)
+      @records ||= apply_pagination(scope)
+    end
+
+    def scope
+      @scope ||= begin
+
+        s = @initial_scope || instance_eval(&self.class.defined_scope)
+        s = apply_includes(s)
+        s = apply_filters(s)
+        s = apply_search(s)
+        s = apply_sort(s)
         
         # Capture total count after filtering but before pagination
-        @total_count = scope.count
-        
-        scope = apply_pagination(scope)
-        scope
+        @total_count = s.count
+        s
       end
     end
 
@@ -112,6 +124,11 @@ module PowerGrid
       range
     end
 
+    
+    def to_csv
+      Exporter.new(self).to_csv
+    end
+
     private
 
     def apply_includes(scope)
@@ -158,20 +175,49 @@ module PowerGrid
     end
 
     def apply_filters(scope)
-      self.class.defined_filters.each do |name, options|
-        value = params[name]
-        next if value.blank?
 
-        # Basic equality filter for now. 
-        # TODO: Support blocks/procs for custom filtering
+      self.class.defined_filters.each do |name, options|
+        value = @params[name] || @params[name.to_s]
         
-        # If sql_expression option exists, use that
-        col_name = options[:sql_expression] || name
-        
-        scope = scope.where(col_name => value)
+        is_number_range = options[:type].to_s == "number_range"
+        has_min_max = @params["#{name}_min"].present? || @params["#{name}_max"].present?
+
+        next if value.blank? && !(is_number_range && has_min_max)
+
+        if options[:block]
+          scope = options[:block].call(scope, value)
+        elsif options[:type].to_s == "date_range" && value.is_a?(String) && value.include?(" to ")
+          start_date, end_date = value.split(" to ")
+          col_name = options[:sql_expression] || name
+          scope = scope.where(col_name => start_date..end_date)
+        elsif options[:type].to_s == "number_range"
+          min = @params["#{name}_min"]
+          max = @params["#{name}_max"]
+          col_name = options[:sql_expression] || name
+          
+
+
+          if min.present? && max.present?
+            scope = scope.where(col_name => min..max)
+          elsif min.present?
+            scope = scope.where("#{col_name} >= ?", min)
+          elsif max.present?
+            scope = scope.where("#{col_name} <= ?", max)
+          end
+        elsif options[:type].to_s == "boolean"
+          col_name = options[:sql_expression] || name
+          bool_value = ActiveRecord::Type::Boolean.new.cast(value)
+          scope = scope.where(col_name => bool_value)
+        else
+          # Basic equality filter
+          # If sql_expression option exists, use that
+          col_name = options[:sql_expression] || name
+          scope = scope.where(col_name => value)
+        end
       end
       scope
     end
+
 
   end
 end

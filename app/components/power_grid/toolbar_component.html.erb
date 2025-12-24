@@ -1,0 +1,47 @@
+
+<% unless @grid.try(:hide_controls) %>
+  <div class="<%= css_class(:container) %>">
+    
+    <!-- Search -->
+    <div class="w-full md:w-72">
+      <% if @grid.searchable? %>
+        <div class="relative">
+          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </div>
+          <%= text_field_tag :q, @grid.params[:q], placeholder: "Search...", 
+              class: css_class(:search_input), 
+              data: { action: "input->power-grid-table#search" },
+              form: "power_grid_form_#{request.path.parameterize}" 
+          %>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- Filters & Actions -->
+    <div class="flex items-center gap-3">
+      <%= form_with url: request.path, method: :get, data: { turbo_frame: "power_grid_table", turbo_action: "advance", power_grid_table_target: "form" }, class: "flex items-center gap-3", id: "power_grid_form_#{request.path.parameterize}" do |f| %>
+        <% @grid.params.except(:per_page, :page, :q, *(@grid.class.defined_filters.keys)).each do |key, value| %>
+           <%= hidden_field_tag key, value %>
+        <% end %>
+
+         <!-- Filters -->
+         <% @grid.class.defined_filters.each do |name, options| %>
+            <div class="relative">
+               <%= render_filter(name, options) %>
+            </div>
+         <% end %>
+         
+        <!-- Per Page -->
+        <div>
+           <%= select_tag :per_page, options_for_select([10, 25, 50, 100], @grid.per_page), 
+               class: css_class(:filter_select),
+               onchange: "this.form.requestSubmit()"
+           %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>
