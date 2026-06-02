@@ -32,6 +32,7 @@ Built with **ViewComponent**, **Turbo Frames**, **Stimulus**, and **TailwindCSS*
 - 🛠 **Modular Toolbar**:
   - Render the toolbar (search/filters) separately from the table for flexible layouts.
 - 🚀 **Optimization**: Built-in support for `includes` to automatically prevent N+1 queries.
+- 📤 **Native CSV Export**: Easily export your grid data to CSV format.
 
 ## Installation
 
@@ -97,6 +98,22 @@ Render the `PowerGrid::TableComponent`, passing the grid instance.
 ```erb
 <!-- app/views/users/index.html.erb -->
 <%= render PowerGrid::TableComponent.new(@grid) %>
+
+### 4. Export to CSV
+
+PowerGrid includes a built-in CSV exporter. You can easily add a controller action to handle CSV downloads.
+
+```ruby
+# app/controllers/users_controller.rb
+def index
+  @grid = UsersGrid.new(params)
+  
+  respond_to do |format|
+    format.html
+    format.csv { send_data @grid.to_csv, filename: "users-#{Date.today}.csv" }
+  end
+end
+```
 ```
 
 ## Advanced Filtering

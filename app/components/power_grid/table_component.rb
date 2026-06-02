@@ -14,7 +14,7 @@ module PowerGrid
       thead: "bg-gray-50 dark:bg-gray-800/50",
       th: "px-4 py-3 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider",
       tbody: "divide-y divide-gray-200 dark:divide-gray-800 bg-white dark:bg-gray-900",
-      tr: "hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors duration-150 ease-in-out group",
+      tr: "hover:bg-gray-50 dark:hover:bg-gray-800/30 transition-colors duration-150 ease-in-out group",
       td: "px-4 py-3 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300",
       pagination: "flex items-center justify-between px-4 py-3 border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900",
       pagination_summary: "text-sm text-gray-700 dark:text-gray-400 hidden sm:block",
